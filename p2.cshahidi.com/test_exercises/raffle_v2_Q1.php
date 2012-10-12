@@ -66,7 +66,7 @@
 	</pre>
 	
 	<!-- Print the results only if we have $_POST; i.e. if the form was submitted -->
-	<? if($_POST): ?>               <!-- alternate control structure -->
+	<? if(implode($_POST) != ""): ?>               <!-- alternate control structure -->
 	
 		The winning number is <?=$winning_number?>!<br><br>
 		
