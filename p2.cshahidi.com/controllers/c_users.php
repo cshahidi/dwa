@@ -26,7 +26,7 @@ class users_controller extends base_controller {
 		# Dump out the results of POST to see what the form submitted
 		print_r($_POST);
 		
-		# <<<Make sure User doesn't already exist>>>
+		# <<<Make sure User doesn't already exist. Email>>>
 		
 		# Encrypt the password
 		$_POST['password'] = sha1(PASSWORD_SALT.$_POST['password']);
