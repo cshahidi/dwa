@@ -29,10 +29,11 @@ A email designated to receive messages from the server. Examples:
  	
  	Some might want this to be the same as the APP_EMAIL, others might want to create a designated gmail address for it
 */ 	
-	define('SYSTEM_EMAIL', 'webmaster@myapp.com'); 
+#	define('SYSTEM_EMAIL', 'webmaster@myapp.com'); 
+    define('SYSTEM_EMAIL','cshahidi@post.harvard.edu');    /* to receive detailed DB error messages via e-mail */
 
 # Default DB name for this app
-	define('DB_NAME', "cshahidi_p2_cshahidi_com"); 
+	define('DB_NAME', 'cshahidi_p2_cshahidi_com'); 
 
 # Timezone
 	define('TIMEZONE', 'America/New_York');
