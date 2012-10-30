@@ -7,11 +7,6 @@ class users_controller extends base_controller {
 		// echo "You are accessing the User's controller<br>";
 	} 
 	
-	/*
-	public function index() {
-		echo "Welcome to the user's department";
-	}
-	*/
 
 	public function signup() {
 		# Setup view
@@ -26,10 +21,26 @@ class users_controller extends base_controller {
 		# Dump out the results of POST to see what the form submitted
 		print_r($_POST);
 		
-		# <<<Make sure User doesn't already exist. Email>>>
-		
 		# Encrypt the password
 		$_POST['password'] = sha1(PASSWORD_SALT.$_POST['password']);
+		
+		# Make sure User doesn't already exist, based on Password & Email
+		# Search the DB for this email and password
+		# Retrieve the token if it's available
+		$q = "SELECT token
+			  FROM users
+			  WHERE  email = '".$_POST['email']."'
+			  AND password = '".$_POST['password']."'";
+			  
+		
+		$token = DB::instance(DB_NAME)->select_field($q);
+		
+		# If we get a token, user has already registered
+		if ($token) {
+			# Send them back to the login page
+			Router::redirect("/users/login/");
+		}
+		
 		
 		# More data we want stored with the user
 		$_POST['created']  = Time::now();
@@ -56,7 +67,7 @@ class users_controller extends base_controller {
 	}
 	
 	public function p_login() {
-
+	
 		# Sanitize the user entered data to prevent any funny business (re: SQL Injection Attacks)
 		$_POST = DB::instance(DB_NAME)->sanitize($_POST);
 		
@@ -79,28 +90,41 @@ class users_controller extends base_controller {
 			# Send them back to the login page
 			Router::redirect("/users/login/");
 		}
+		
 		# But if we did, login succeeded!
 		else {
-			# <<<Ensure user is not already logged in. If so, take them to Profile page and exit.>>>
+			# Ensure user is not already logged in. If so, take them to Profile page and exit.
 			if ($this->user) {
-				echo "You are already logged in.";
+				# Already logged in; Display the profile view and exit.
 				Router::redirect("/users/profile/");
 				
-				# Display the profile view and exit.
 				return;    
 			}
 		
 			# Store this token in a cookie
 			setcookie("token", $token, strtotime('+1 year'), '/');
-			
-			# Send them to the main page - or wherever you want them to go
-			Router::redirect("/");
+		
+			# If we were passed a $destination (e.g. /users/profile page), send them there
+			if(isset($_GET['destination'])) {
+				Router::redirect($_GET['destination']);
+			}
+			else {
+				# Otherwise, send them to the main page 
+				Router::redirect("/");
+			}
 			
 			# <<<Develop main page (logged in page) >>>
 		}
 	}	
 	
 	public function logout() {
+	
+		# Ensure user is not already logged out. If so, take them to Profile page and exit.
+		if (!$this->user) {
+			# Already logged out; Display the Home page and exit
+			Router::redirect("/");			
+			return;    
+		}	
 		
 		# Generate and save a new token for next login
 		$new_token = sha1(TOKEN_SALT.$this->user->email.Utils::generate_random_string());
@@ -120,13 +144,23 @@ class users_controller extends base_controller {
 	
 	public function profile() {
 		
-	# If user is blank, they're not logged in. Show message and don't do anything else
+	# If user is blank, they're not logged in. 
 	if (!$this->user) {
-		echo "Members only. <a href='/users/login'>Login</a>";
+		//echo "Members only. <a href='/users/login'>Login</a>";
 		
-		# Return will force this method to exit here so the rest of the code won't be
-		# exectuted and the profile view won't be displayed.
-		return FALSE;     # or just return
+		# Create a view fragment with just the login form 
+		$view_fragment = View::instance("v_users_login");
+		
+		# Tell the login form where we should end up (back here) when we're done loggin in
+		$view_fragment->message     = "You don't have access to view this page. Please login.";
+		$view_fragment->destination = "/users/profile";
+		
+		# Display the login form
+		echo $view_fragment;
+		
+		
+		# Return will prevent anything else from happening in this controller
+		return;
 	}
 		
 	# Setup view
