@@ -47,8 +47,9 @@ class posts_controller extends base_controller {
 			$q = "SELECT posts.*, users.user_id, users.first_name, users.last_name 
 				FROM posts 
 				JOIN users USING (user_id)
-				WHERE posts.user_id IN (".$connections_string.")"; # This is where we use that string of user_ids we created
-						
+				WHERE posts.user_id IN (".$connections_string.") /* This is where we use that string of user_ids we created */
+				ORDER BY posts.created DESC";	/* Show posts in reverse chronological (DESC) order */
+				
 			# Run our query, store the results in the variable $posts
 			$posts = DB::instance(DB_NAME)->select_rows($q);
 			
