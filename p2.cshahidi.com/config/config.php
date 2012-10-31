@@ -37,6 +37,9 @@ A email designated to receive messages from the server. Examples:
 
 # Timezone
 	define('TIMEZONE', 'America/New_York');
+	
+# Time Format. This overrides what is se in the core config.php, presently: (F j, Y g:ia) 	
+	define('TIME_FORMAT', 'F j, Y g:ia'); 	
 
 # If your app is going to have outgoing emails, you should fill in your SMTP settings
 # For this you could use gmail SMTP or something like http://sendgrid.com/

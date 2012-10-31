@@ -42,17 +42,20 @@ class posts_controller extends base_controller {
 			# Connections string example: 10,7,8 (where the numbers are the user_ids of who this user is following)
 
 			# Now, lets build our query to grab the posts
-			$q = "SELECT * 
+			# Get everything from posts, but only get the user_id, first_name and last_name of users.
+			# This way, the "created" field from users won't override the "created" of posts.
+			$q = "SELECT posts.*, users.user_id, users.first_name, users.last_name 
 				FROM posts 
 				JOIN users USING (user_id)
 				WHERE posts.user_id IN (".$connections_string.")"; # This is where we use that string of user_ids we created
 						
 			# Run our query, store the results in the variable $posts
 			$posts = DB::instance(DB_NAME)->select_rows($q);
+			
+			# $posts will remain an empty string if User has no connections yet
 		}
 		else {
-			# User has no connection yet
-			$posts = "empty";
+			$posts = "";
 		}
 		
 		# Pass data to the view
