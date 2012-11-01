@@ -2,7 +2,7 @@
 <? if(isset($message)) echo $message; ?><br><br>
 
 <!--  If the $destination is set, we want to append it as a query string to the url so it sends user to 
-	  /users/p_login/?destination=/users/profile after login. Destination set in in /users/profile.
+	  /users/p_login/?destination=/users/profile after login. Destination set in /users/profile.
 	
        The following would result in this Query string if $destination is set:  
       "/users/p_login/?destination=/users/profile"    (stored in $_GET['destination'])
@@ -21,7 +21,8 @@
 	<input type="password" name="password">
 	<br><br>
 	
-	<? if($error): ?>
+	<!-- $error defined in login() method; not defined in index() method for landing page. Suppress it -->	
+	<? if(@$error): ?>    
 		<div class="error">
 			Login failed. Please double check your email and password.
 		</div>

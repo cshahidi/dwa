@@ -142,7 +142,8 @@ class users_controller extends base_controller {
 		# Delete their token cookie - effectively logging them out
 		setcookie("token", "", strtotime('-1 year'), '/');
 		
-		echo "You have been logged out.";
+		# Logged out; Display the Home page and exit
+		Router::redirect("/");	
 	}
 	
 	public function profile() {
@@ -157,6 +158,7 @@ class users_controller extends base_controller {
 		# Tell the login form where we should end up (back here) when we're done loggin in
 		$view_fragment->message     = "You don't have access to view this page. Please login.";
 		$view_fragment->destination = "/users/profile";
+		$view_fragment->title   = "Login";
 		
 		# Display the login form
 		echo $view_fragment;

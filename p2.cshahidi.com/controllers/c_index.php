@@ -25,6 +25,10 @@ class index_controller extends base_controller {
 	    
 	    	$this->template->client_files = Utils::load_client_files($client_files);   
 	      		
+		# Set subview to be a view fragment to display login form on the landing page (instead of link)
+			$this->template->content->subview = View::instance('v_users_login');
+		
+				
 		# Render the view
 			echo $this->template;
 

@@ -16,7 +16,7 @@ class posts_controller extends base_controller {
 		
 		# Set up view
 		$this->template->content = View::instance('v_posts_index');
-		$this->template->title   = "Posts";
+		$this->template->title   = "All Posts";
 		
 		# Build a query of the users this user is following - we're only interested in their posts
 		$q = "SELECT * 
@@ -67,11 +67,15 @@ class posts_controller extends base_controller {
 		
 	}	
 	
-	public function add() {
+	
+	public function add( $add_another_post = NULL) {
 	
 		# Setup view
 		$this->template->content = View::instance('v_posts_add');
 		$this->template->title   = "Add a new post";
+		
+		# Pass data to the view
+		$this->template->content->add_another_post = $add_another_post;
 		
 		# Render template
 		echo $this->template;
@@ -90,7 +94,10 @@ class posts_controller extends base_controller {
 		DB::instance(DB_NAME)->insert('posts', $_POST);
 		
 		# Quick and dirty feedback
-		echo "Your post has been added. <a href='/posts/add'>Add another?</a>";
+		# echo "Your post has been added. <a href='/posts/add'>Add another?</a>";
+		
+		# Pass data Send them back if they wish to add any other posts
+		Router::redirect("/posts/add/add_another_post?"); # pass parameter "add_another_post?" string
 	}
 	
 	public function users() {
