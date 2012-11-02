@@ -114,9 +114,7 @@ class users_controller extends base_controller {
 			else {
 				# Otherwise, send them to the main page 
 				Router::redirect("/");
-			}
-			
-			# <<<Develop main page (logged in page) >>>
+			}			
 		}
 	}	
 	
@@ -158,7 +156,7 @@ class users_controller extends base_controller {
 		# Tell the login form where we should end up (back here) when we're done loggin in
 		$view_fragment->message     = "You don't have access to view this page. Please login.";
 		$view_fragment->destination = "/users/profile";
-		$view_fragment->title   = "Login";
+		$view_fragment->title        = "Login";
 		
 		# Display the login form
 		echo $view_fragment;

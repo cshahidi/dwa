@@ -64,8 +64,58 @@ class posts_controller extends base_controller {
 		
 		# Render view
 		echo $this->template;
-		
 	}	
+	
+	
+	/* Method to show only this users posts, so they can edit the posts */ 
+	public function myposts() {
+		
+		# Set up view
+		$this->template->content = View::instance('v_posts_index');
+		$this->template->title   = "My Posts";
+		
+		# Build a query of the posts this user has posted. Must be following themselves.
+		# SELECT 1 just looks for one record and returns TRUE; otherwise NULL when no match.
+		$q = "SELECT 1 
+			FROM users_users
+			WHERE user_id        = ".$this->user->user_id."
+			AND user_id_followed = ".$this->user->user_id;
+			
+		# Execute our query, storing the results in a variable $connections
+		$my_connection = DB::instance(DB_NAME)->select_rows($q);			
+		
+		if ($my_connection != NULL) {
+			# User is following themselves
+	
+			# Now, lets build our query to grab the posts
+			# Get everything from posts, but only get the user_id, first_name and last_name of users.
+			# This way, the "created" field from users table won't override the "created" of posts table.
+			$q = "SELECT posts.*, users.user_id, users.first_name, users.last_name 
+				FROM posts 
+				JOIN users USING (user_id)
+				WHERE posts.user_id = ".$this->user->user_id."
+				ORDER BY posts.created DESC";	/* Show posts in reverse chronological (DESC) order */
+				
+			# Run our query, store the results in the variable $posts
+			$posts = DB::instance(DB_NAME)->select_rows($q);
+			
+			# $posts will remain an empty string if User has no connections yet, to themselves or others.
+		}
+		else {
+			# User is not following themselves
+			$posts = "";
+			
+			# Pass data to the View. Indicate user must follow themselves first.
+			$this->template->content->must_follow_yourself = TRUE;	
+		}
+		
+		# Pass data to the view
+		$this->template->content->posts = $posts;	
+		
+		# Render view
+		echo $this->template;
+		
+	}		
 	
 	
 	public function add( $add_another_post = NULL) {
@@ -144,6 +194,13 @@ class posts_controller extends base_controller {
 		# Do the insert
 		DB::instance(DB_NAME)->insert('users_users', $data);
 
+		# Case where user is viewing their own posts via myposts() and just started Following themselves
+		# NEED TO FIGURE THIS OUT
+		/*if () {
+			Router::redirect("/posts/myposts");
+		}
+		*/
+		
 		# Send them back
 		Router::redirect("/posts/users");
 
