@@ -2,9 +2,8 @@
 	<!-- User not logged in -->
 	
 	<h1>Welcome to BlogExpress!</h1>
-	<div class="login-box">
-		<?=$subview?>   <!-- Login View -->
-	</div>
+	<?=$subview?>   <!-- Login View. Contains class="login-box" -->
+	
 	
 	
 	<!-- Add some introduction to application -->
