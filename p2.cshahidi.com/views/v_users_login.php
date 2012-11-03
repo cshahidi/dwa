@@ -11,24 +11,31 @@
 	  "/users/p_login" (wouldn't trigger any sort of destination redirect
 -->
 	  
+
 <form method= "POST" action="/users/p_login/<? if(isset($destination)) echo "?destination=".$destination; ?>">		
+
+	<div id="login-info">	
+		<h2>Log in:</h2>
+	
+		<p>Email</p>
+		<input type="text" name="email">
+		<br><br>
 		
-	Email<br>
-	<input type="text" name="email">
-	<br><br>
-	
-	Password<br>
-	<input type="password" name="password">
-	<br><br>
-	
-	<!-- $error defined in login() method; not defined in index() method for landing page. Suppress it -->	
-	<? if(@$error): ?>    
-		<div class="error">
-			Login failed. Please double check your email and password.
-		</div>
-		<br>
-	<? endif; ?>	
-	
-	<input type="submit">
+		<p>Password</p>
+		<input type="password" name="password">
+		<br><br>
+
+		<!-- $error defined in login() method; not defined in index() method for landing page. Suppress it -->	
+		<? if(@$error): ?>    
+			<div class="error">
+				Login failed. Please double check your email and password.
+			</div>
+			<br>
+		<? endif; ?>	
+		
+		<input type="submit">
+	</div> <!-- endiv login-info -->	
 	
 </form>
+
+

@@ -19,7 +19,7 @@ class users_controller extends base_controller {
 	
 	public function p_signup(){
 		# Dump out the results of POST to see what the form submitted
-		print_r($_POST);
+		//print_r($_POST);
 		
 		# Encrypt the password
 		$_POST['password'] = sha1(PASSWORD_SALT.$_POST['password']);
@@ -52,7 +52,9 @@ class users_controller extends base_controller {
 		$user_id = DB::instance(DB_NAME)->insert("users", $_POST);
 		
 		# For now, just confirm they've signed up - we can make this fancier later
-		echo "You're signed up";
+		# Send them back to the login page
+		Router::redirect("/users/login/");
+		
 	}
 	
 	
@@ -148,7 +150,7 @@ class users_controller extends base_controller {
 		
 	# If user is blank, they're not logged in. 
 	if (!$this->user) {
-		//echo "Members only. <a href='/users/login'>Login</a>";
+		echo "Members only. <a href='/users/login'>Login</a>";
 		
 		# Create a view fragment with just the login form 
 		$view_fragment = View::instance("v_users_login");
@@ -156,14 +158,23 @@ class users_controller extends base_controller {
 		# Tell the login form where we should end up (back here) when we're done loggin in
 		$view_fragment->message     = "You don't have access to view this page. Please login.";
 		$view_fragment->destination = "/users/profile";
-		$view_fragment->title        = "Login";
+		$view_fragment->title        = "Login";  # Doesn't work, because only template can access title
 		
 		# Display the login form
 		echo $view_fragment;
 		
-		
 		# Return will prevent anything else from happening in this controller
-		return;
+		return;		
+		
+		
+		# Create view template with the login form; this option didn't retain message and 
+		//$this->template->content          = View::instance("v_users_login");
+		//$this->template->content->message = "You don't have access to view this page. Please login.";
+		//$this->template->content->destination   = "/users/profile";
+		//$this->template->title            = "Login";
+		
+		# Send them back to the login page
+		//Router::redirect("/users/login/");		
 	}
 		
 	# Setup view

@@ -17,6 +17,7 @@ class posts_controller extends base_controller {
 		# Set up view
 		$this->template->content = View::instance('v_posts_index');
 		$this->template->title   = "All Posts";
+		$this->template->content->h1 = "All Posts";
 		
 		# Build a query of the users this user is following - we're only interested in their posts
 		$q = "SELECT * 
@@ -73,6 +74,7 @@ class posts_controller extends base_controller {
 		# Set up view
 		$this->template->content = View::instance('v_posts_index');
 		$this->template->title   = "My Posts";
+		$this->template->content->h1 = "My Posts";
 		
 		# Build a query of the posts this user has posted. Must be following themselves.
 		# SELECT 1 just looks for one record and returns TRUE; otherwise NULL when no match.
