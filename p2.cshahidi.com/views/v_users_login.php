@@ -1,5 +1,6 @@
 <!-- Display any message set by profile(), if user has not logged in -->
-<? if(isset($message)) echo $message; ?><br><br>
+<br>
+<h3><? if(isset($message)) echo $message; ?></h3><br><br>
 
 <!--  If the $destination is set, we want to append it as a query string to the url so it sends user to 
 	  /users/p_login/?destination=/users/profile after login. Destination set in /users/profile.
@@ -14,7 +15,7 @@
 
 <form method= "POST" action="/users/p_login/<? if(isset($destination)) echo "?destination=".$destination; ?>">		
 
-	<div id="login-info">	
+	<div class="login-info">	
 		<h2>Log in:</h2>
 	
 		<p>Email</p>

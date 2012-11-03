@@ -2,13 +2,13 @@
 	<!-- User not logged in -->
 	
 	<h1>Welcome to BlogExpress!</h1>
-	<div id="right-box">
+	<div class="login-box">
 		<?=$subview?>   <!-- Login View -->
 	</div>
 	
 	
 	<!-- Add some introduction to application -->
-	<div class="left-box">
+	<div class="welcome-box">
 		<h2> BlogExpress is a no frills version of Twitter microblog. </h2>
 		<h2> This is Class Project #2 for the class CSCIE-75, Fall 2012. </h2>
 		<h3>  My two extra features are:</h3>
@@ -24,7 +24,7 @@
 	<!-- User is logged in -->
 	<h1>Welcome back <?=$user->first_name?>! </h1>
 	
-	<div class="left-box">
+	<div class="welcome-box">
 		<h2>You can use BlogExpress to:</h2>
 		<ul>
 			<li>Sign up for a new account</li>

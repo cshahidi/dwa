@@ -17,7 +17,7 @@
 	<link  href="/css/master.css" rel="stylesheet" type="text/css">
 				
 	<!-- Controller Specific JS/CSS -->
-	<?php echo @$client_files; ?>
+	<!-- <?php echo @$client_files; ?> -->
 	
 </head>
 

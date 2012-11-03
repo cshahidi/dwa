@@ -1,21 +1,25 @@
+<h1>Please Sign up for New Account</h1>
+
 <form method="POST" action="/users/p_signup">
 
-	First Name<br>
-	<input type="text" name="first_name">
-	<br><br>
-	
-	Last Name<br>
-	<input type="text" name="last_name">
-	<br><br>
-	
-	Email<br>
-	<input type="text" name="email">
-	<br><br>
-	
-	Password<br>
-	<input type="password" name="password">
-	<br><br>
-	
-	<input type="submit">
-	
+	<div class="login-info">
+		<p>First Name</p>
+		<input type="text" name="first_name">
+		<br>
+		
+		<p>Last Name</p>
+		<input type="text" name="last_name">
+		<br>
+		
+		<p>Email</p>
+		<input type="text" name="email">
+		<br>
+		
+		<p>Password</p>
+		<input type="password" name="password">
+		<br><br>
+		
+		<input type="submit">
+	</div>	
 </form>
+		
