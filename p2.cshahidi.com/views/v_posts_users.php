@@ -10,10 +10,10 @@
 			<!-- If there exists a connection with this user, show a unfollow link -->
 			
 				<? if(isset($connections[$user['user_id']])): ?>
-					<a class="follow-link" href='/posts/unfollow/<?=$user['user_id']?>'>Unfollow</a>
+					<div class="follow-link"><a href="/posts/unfollow/<?=$user['user_id']?>">Unfollow</a></div>
 				<!-- Otherwise, show the follow link -->
 				<? else: ?>
-					<a class="follow-link" href='/posts/follow/<?=$user['user_id']?>'>Follow</a>
+					<div class="follow-link"><a href="/posts/follow/<?=$user['user_id']?>">Follow</a></div>
 				<? endif; ?>
 				
 		</div>
