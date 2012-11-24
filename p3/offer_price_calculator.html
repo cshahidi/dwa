@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<head>
+	<title>Real Estate Offer Price Calculator</title>	
+	<meta http-equiv="Content-type" content="text/html; charset=UTF-8" />	
+	
+	<!-- Load stylesheet -->
+	<link href="css/offer_price_calculator.css" rel="stylesheet" type="text/css" />	
+	
+	<!-- Load jQuery -->
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"></script>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js"></script>	
+	
+	<script type="text/javascript" src="js/offer_price_calculator.js"></script>	
+</head>
+
+<body>
+	<div id='wrapper'>
+
+		<!-- HEADING -->
+		<h1>House Offer Price Calculator</h1>
+		
+		<div id="main">
+			<h2>Enter your Info:</h2>
+								
+			<div id= "input-fields">	
+
+				<div class="fineprint">
+					<span class="star">* </span><span class="fineprint">= Required field.</span>
+				</div><br>	
+			
+				<label for="after-repair-value">After Repair Value ($): <span class="star" >*</span>      </label>
+				<input id= "after-repair-value" type="text" maxlength="12"/><br><br>
+				
+				<label for="profit-goal">Profit Goal ($): <span class="star" >*</span></label>
+				<input id= "profit-goal" type="text" maxlength="12"/><br><br>
+
+				<label for="estimated-repairs">Estimated Repairs ($): <span class="star" >*</span></label>
+				<input id= "estimated-repairs" type="text" maxlength="12"/><br><br>
+
+				<label for="commission">Commission @ sale ($): <span class="star" >*</span></label>
+				<input id= "commission" type="text" maxlength="12"/><br><br>
+				
+				<label for="closing-costs-in">Closing Costs In ($): <span class="star" >*</span></label>
+				<input id= "closing-costs-in" type="text" maxlength="12" value="3000"/><br><br>
+				
+				<label for="closing-costs-out">Closing Costs Out ($): <span class="star" >*</span></label>
+				<input id= "closing-costs-out" type="text" maxlength="12" value="3000"/><br><br><br>	
+
+				<label for="carry-cost"><strong>Carry Cost for 6 months: </strong></label><br><br>		
+
+					<label for="taxes">Taxes ($): <span class="star" >*</span></label>
+					<input id= "taxes" type="text" maxlength="12"/><br><br>		
+
+					<label for="insurance">Insurance ($): <span class="star" >*</span></label>
+					<input id= "insurance" type="text" maxlength="12"/><br><br>		
+
+					<label for="principal-and-interest">Principal & Interest ($): </label>
+					<input id= "principal-and-interest" type="text" maxlength="12" value="0"/><br>	
+				
+
+				<!-- div to dispay an error message if necessary -->
+				<div class="error" id ="input_error">
+					<!-- =======Error Placeholder=============== -->
+					&nbsp;&nbsp;&nbsp; 
+				</div>				
+
+				<div class="totals">
+					<label for="maximum-offer" id="max-offer-label"><strong>Maximum Offer ($):</strong></label>
+					<input id ="maximum-offer" type="text" maxlength="14" readonly="readonly"/>	
+				</div>
+				
+			</div>   <!-- endiv input-fields -->
+		</div>       <!-- endiv main -->
+		
+				
+		<!-- Finalize Buttons -->
+		<br><br>
+		<div id="finalize-buttons">
+			<input type="submit" class="button" id="refresh-button" value="Clear All">
+			<input type="submit" class="button" id="calculate-button" value="Calculate">		
+		</div>
+
+	
+		
+		<!-- FOOTER -->
+		<div id='footer'></div>
+		
+	</div>	<!-- endiv wrapper -->
+</body>
+</html>
