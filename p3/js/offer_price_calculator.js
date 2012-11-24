@@ -53,86 +53,102 @@ $(document).ready(function() {	//start doc ready
 	// "Calculate" Button - Clear all text fields
 	$("#calculate-button").click(function() {
 
-		validateInputFields();
+		// Clear the error message on each Calculate click
+		$("#input_error").html("");
+
+		// Validate each input field entry
+		if( validateInputFields()) {
 		
-		// If all the input are validated, Calculate maximimum Offer Price
-		max_offer_price = 	after_repair_value - (profit_goal + estimated_repairs + commission +
-							closing_costs_in + closing_costs_out + taxes + insurance + 
-							principal_and_interest);
-							
-		console.log(max_offer_price);
-		$("#maximum_offer").val(max_offer_price);
-					
+			// If all the inputs are validated, Calculate maximimum Offer Price
+			var expenses = profit_goal + estimated_repairs + commission + 
+							closing_costs_in + closing_costs_out + taxes + 
+							insurance + principal_and_interest;
+							  
+			max_offer_price = after_repair_value - profit_goal - estimated_repairs - commission - 
+							closing_costs_in - closing_costs_out - taxes - 
+							insurance - principal_and_interest;
+			
+			console.log(profit_goal);
+			//console.log(expenses);
+			console.log(max_offer_price);
+
+			$("#maximum-offer").val(max_offer_price);		
+		
+		}							
 	});	
 	
 	/******************************************************************************/
 	// Validate all input fields
-	function validateInputFields() {	
+	function validateInputFields() {	  
 		
 		// Process After Repair Value
 		after_repair_value = $("#after-repair-value").val();
+		console.log(after_repair_value);
 		
 		// Verify that input is not an empty string and is a number
 		if (isNaN(after_repair_value)) {
-			$("#input_error").html("Please enter a number for After Repair Value");
+			$("#input_error").html("Please enter a number for After Repair Value!");
 			return (false);
 		}	
 		
 		// Process Profit Goal
 		profit_goal = $("#profit-goal").val();
 		if (isNaN(profit_goal)) {
-			$("#input_error").html("Please enter a number for Profit Goal");
+			$("#input_error").html("Please enter a number for Profit Goal!");
 			return (false);
 		}	
 		
 		// Process Estimated Repairs
 		estimated_repairs = $("#estimated-repairs").val();
 		if (isNaN(estimated_repairs)) {
-			$("#input_error").html("Please enter a number for Estimated Repairs");
+			$("#input_error").html("Please enter a number for Estimated Repairs!");
 			return (false);
 		}			
 		
 		// Process Commission				
-		commission = $("#commission").val("");
+		commission = $("#commission").val();
 		if (isNaN(commission)) {
-			$("#input_error").html("Please enter a number for Commission");
+			$("#input_error").html("Please enter a number for Commission!");
 			return (false);
 		}	
 		
 		// Process Closing Costs In				
 		closing_costs_in = $("#closing-costs-in").val();
 		if (isNaN(closing_costs_in)) {
-			$("#input_error").html("Please enter a number for Closing Costs In");
+			$("#input_error").html("Please enter a number for Closing Costs In!");
 			return (false);
 		}		
 		
 		// Process Closing Costs Out				
 		closing_costs_out = $("#closing-costs-out").val();
 		if (isNaN(closing_costs_out)) {
-			$("#input_error").html("Please enter a number for Closing Costs Out");
+			$("#input_error").html("Please enter a number for Closing Costs Out!");
 			return (false);
 		}			
 		
 		// Process Taxes				
 		taxes = $("#taxes").val();
 		if (isNaN(taxes)) {
-			$("#input_error").html("Please enter a number for Taxes");
+			$("#input_error").html("Please enter a number for Taxes!");
 			return (false);
 		}	
 
 		// Process Insurance			
 		insurance = $("#insurance").val();
 		if (isNaN(insurance)) {
-			$("#input_error").html("Please enter a number for Insurance");
+			$("#input_error").html("Please enter a number for Insurance!");
 			return (false);
 		}
 		
 		// Process Principal & Interest (Mortgage Payments)			
 		principal_and_interest = $("#principal-and-interest").val();
 		if (isNaN(principal_and_interest)) {
-			$("#input_error").html("Please enter a number for Principal & Interest");
+			$("#input_error").html("Please enter a number for Principal & Interest!");
 			return (false);
 		}		
+		
+		// All inputs valid
+		return (true);
 			
 	} // end validateInputFields()
 	
@@ -155,6 +171,7 @@ $(document).ready(function() {	//start doc ready
 		$("#insurance").val("");	
 		$("#principal-and-interest").val("");	
 		
+		$("#maximum-offer").val("");
 		$("#input_error").html("");  
 			
 	});	

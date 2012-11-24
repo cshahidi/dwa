@@ -102,8 +102,10 @@ h2 {
 }	
 
 .error#input_error {
-	font-size: 20px;
+	font-size: 16px;
 	font-style: italic;
+	margin-top: 18px;
+	text-align: center;
 }
 
 /* styles specific to web page */
@@ -163,6 +165,7 @@ input[type="text"], input[type="password"], textarea {
 
 #maximum-offer {
 	border-color: teal;
+	color: teal;
 }
 
 #finalize-buttons {
