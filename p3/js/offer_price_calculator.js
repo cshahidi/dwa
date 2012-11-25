@@ -1,7 +1,7 @@
 
 $(document).ready(function() {	//start doc ready
 				
-	// Declare local variables
+	// Declare Global variables
 	var after_repair_value;
 	var profit_goal;
 	var estimated_repairs;
@@ -13,148 +13,181 @@ $(document).ready(function() {	//start doc ready
 	var principal_and_interest;
 	var max_offer_price;
 
-	/*********************************************************************/				
-	// Recipient (from text input). Find the value of the input box
-	$("input").keyup(function () {
+	/******************************************************************************/
+	// Show calculator div and hide help div on page load
+	$("#help").hide();
 	
-		// Get content entered in the form element			
-		var recipient = $(this).val();  
-		
-		// JS string.length property
-		var length = recipient.length;  
-		
-		// Error checking
-		var maxlength = 14;
-		
-		// Show a countdown message of how many characters user has left
-		var characters_left = maxlength - length;
-		$("#recipient-error").html("There are " + characters_left + " characters left");				
-		
-		// Toggle color of the message depending on how many characters they have left
-		if(characters_left <=3 && characters_left > 0) {
-			$("#recipient-error").css("color", "orange");
-		}	
-		else if (characters_left == 0) {
-			$("#recipient-error").html("The maximum number of characters is " +  maxlength);
-			$("#recipient-error").css("color", "red");	
-			$("#recipient-error").css("font-weight", "bold");	
-			// color default red (.error), but changed with the if{} statement 	
-		}		
-		else {
-			$("#recipient-error").css("color", "grey");				
-		}
-
-		
+	// If "Help" button on top is clicked, hide calculator div and show help div
+	$("#help_button_header").click(function() {
+		$("#calculator").hide();
+		$("#help").show();
 	});
-
+	
+	// If "Calculator" button on top is clicked, show calculator div and hide help div
+	$("#calculator_button_header").click(function() {
+		$("#calculator").show();
+		$("#help").hide();
+	});	
+	
 	
 	
 	/******************************************************************************/	
-	// "Calculate" Button - Clear all text fields
+	// "Calculate" Offer Button in Calculator form. Depressed after all the inputs have been entered.
 	$("#calculate-button").click(function() {
-
+		calculate_offer();
+	});
+	
+	
+	/******************************************************************************/
+	function calculate_offer() {
+	
 		// Clear the error message on each Calculate click
-		$("#input_error").html("");
+		$("#input_error").html(""); 
 
 		// Validate each input field entry
 		if( validateInputFields()) {
 		
-			// If all the inputs are validated, Calculate maximimum Offer Price
-			var expenses = profit_goal + estimated_repairs + commission + 
-							closing_costs_in + closing_costs_out + taxes + 
-							insurance + principal_and_interest;
-							  
+			/* Calculate Subtotal, used to figure monthly mortgage payments if offer is not All Cash.
+			 * This is After Rehab Value minus all expenses except Principal & Interest, which we we
+			 * trying to figure.
+			 * This is the "Property Price" to plug into the Trulia Mortgage Calculator.
+			 * Please find the Mortgage Calculator at http://www.trulia.com/mortgage-calculators/.
+			 * Multiply the "Total monthly payments" figure by 6 (6 months) and plug it into 
+			 * "Principal & Interest" field.
+			 */
+			calculate_subtotal_for_mortgage();	
+		
+			// All the inputs are validated, Calculate maximimum Offer Price							  
 			max_offer_price = after_repair_value - profit_goal - estimated_repairs - commission - 
 							closing_costs_in - closing_costs_out - taxes - 
 							insurance - principal_and_interest;
-			
-			console.log(profit_goal);
-			//console.log(expenses);
-			console.log(max_offer_price);
 
-			$("#maximum-offer").val(max_offer_price);		
+			// Round final value down to lowest integer value.
+			$("#maximum-offer").val(Math.floor(max_offer_price));		
 		
 		}							
-	});	
+	}
 	
 	/******************************************************************************/
 	// Validate all input fields
 	function validateInputFields() {	  
 		
-		// Process After Repair Value
-		after_repair_value = $("#after-repair-value").val();
-		console.log(after_repair_value);
-		
-		// Verify that input is not an empty string and is a number
-		if (isNaN(after_repair_value)) {
-			$("#input_error").html("Please enter a number for After Repair Value!");
+		// Process After Repair Value.  Verify that text field inputs have numeric content.
+		after_repair_value = $("#after-repair-value").val();		
+		if (validateNumericInput( after_repair_value, "After Repair Value")== false) {
 			return (false);
-		}	
+		}
 		
 		// Process Profit Goal
 		profit_goal = $("#profit-goal").val();
-		if (isNaN(profit_goal)) {
-			$("#input_error").html("Please enter a number for Profit Goal!");
+		if (validateNumericInput( profit_goal, "Profit Goal")== false) {
 			return (false);
-		}	
+		}
+		
 		
 		// Process Estimated Repairs
 		estimated_repairs = $("#estimated-repairs").val();
-		if (isNaN(estimated_repairs)) {
-			$("#input_error").html("Please enter a number for Estimated Repairs!");
+		if (validateNumericInput( estimated_repairs, "Estimated Repairs")== false) {
 			return (false);
 		}			
 		
 		// Process Commission				
 		commission = $("#commission").val();
-		if (isNaN(commission)) {
-			$("#input_error").html("Please enter a number for Commission!");
+		if (validateNumericInput( commission, "Commission")== false) {
 			return (false);
 		}	
 		
 		// Process Closing Costs In				
 		closing_costs_in = $("#closing-costs-in").val();
-		if (isNaN(closing_costs_in)) {
-			$("#input_error").html("Please enter a number for Closing Costs In!");
+		if (validateNumericInput( closing_costs_in, "Closing Costs In")== false) {
 			return (false);
 		}		
 		
 		// Process Closing Costs Out				
 		closing_costs_out = $("#closing-costs-out").val();
-		if (isNaN(closing_costs_out)) {
-			$("#input_error").html("Please enter a number for Closing Costs Out!");
-			return (false);
-		}			
-		
-		// Process Taxes				
-		taxes = $("#taxes").val();
-		if (isNaN(taxes)) {
-			$("#input_error").html("Please enter a number for Taxes!");
-			return (false);
-		}	
-
-		// Process Insurance			
-		insurance = $("#insurance").val();
-		if (isNaN(insurance)) {
-			$("#input_error").html("Please enter a number for Insurance!");
-			return (false);
-		}
-		
-		// Process Principal & Interest (Mortgage Payments)			
-		principal_and_interest = $("#principal-and-interest").val();
-		if (isNaN(principal_and_interest)) {
-			$("#input_error").html("Please enter a number for Principal & Interest!");
+		if (validateNumericInput( closing_costs_out, "Closing Costs Out")== false) {
 			return (false);
 		}		
 		
+		// Process Taxes				
+		taxes = $("#taxes").val();
+		if (validateNumericInput( taxes, "Taxes")== false) {
+			return (false);
+		}
+
+		// Process Insurance			
+		insurance = $("#insurance").val();
+		if (validateNumericInput( insurance, "Insurance")== false) {
+			return (false);
+		}
+		
+		// Process Principal & Interest (P&I: Mortgage Payments)			
+		principal_and_interest = $("#principal-and-interest").val();
+		if (validateNumericInput( principal_and_interest, "Principal & Interest")== false) {
+			return (false);
+		}		
+						
 		// All inputs valid
 		return (true);
 			
 	} // end validateInputFields()
 	
 
+	
+	/*************Function called from validateInputFields()****************************/
+	// Verify that text field inputs have positive numeric content (and are not an empty string)
+	
+	function validateNumericInput(str_value, str_label) {
+		
+		var int_value = parseInt(str_value);
+		
+		// check that number is integer and not an empty string
+		if( isNaN(int_value) || str_value == "") {
+			$("#input_error").html("Please enter a valid number for " + str_label +"!");  
+			return(false);
+		}	
+		
+		// check that number is positive
+		else if (int_value < 0) {
+			$("#input_error").html("Please enter a positive number or 0 for " + str_label +"!");  
+			return(false);
+		}
+		
+		// check that number is not larger than after_repair_value
+		else if (str_label != "After Repair Value") {
+		
+			if (int_value >= after_repair_value) {
+				$("#input_error").html("Please ensure " + str_label + " is less than After Repair Value!");  
+				return(false);
+			}
+		}
+		
+		// Input is Valid		
+		else {
+			return(true);		
+		}		
+	}
+		
+	
+	/*************Function called from first ****************************/
+	//  Calculate Subtotal, used to figure monthly mortgage payments (P&I) if offer is not All Cash.
+	function calculate_subtotal_for_mortgage() {
+	
+		subtotal =  after_repair_value - profit_goal - estimated_repairs - commission - 
+						closing_costs_in - closing_costs_out - taxes - insurance; 
 
+		$("#trulia_info").html("Your Subtotal is " + subtotal + ". " +
+						"You can use this as your Property Price to get your mortgage payment using " +
+						"<a href='http://www.trulia.com/mortgage-calculators/'>Trulia Mortgage Calculator</a> " +
+						"for Principal & Interest.");	
 
+		// Clear the div for Trulia mortgage caculator link if user inputs any entries in P&I
+		if (principal_and_interest != "0") {
+			$("#trulia_info").html("");  
+		}		
+	}
+	
+	
 	
 	
 	/******************************************************************************/	
@@ -171,9 +204,11 @@ $(document).ready(function() {	//start doc ready
 		$("#insurance").val("");	
 		$("#principal-and-interest").val("");	
 		
+		$("#trulia_info").html("");  
+		
 		$("#maximum-offer").val("");
-		$("#input_error").html("");  
-			
+		$("#input_error").html(""); 
+		
 	});	
 	
 	

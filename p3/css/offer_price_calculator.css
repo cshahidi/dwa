@@ -26,42 +26,14 @@ h2 {
 	color: 	   	maroon;
 	font-size:	170%;
 	font-size:25px;
-	margin-top:30px;
-	margin-bottom: 5px;
-	margin-left: 23%;;
+	margin-top:10px;
+	margin-bottom: 8px;
+	text-align: center;
 }
 
-
-#card {
-	background-image:url('images/card-background.jpg');
-	background-repeat:no-repeat;
-	width:369px;	
-	height:513px;
-	margin:0px auto;
-}
-
-#canvas {
-	width:338px;
-	height:469px;
-	position:relative;
-	top:33px;
-	left:16px;
-	overflow:hidden;
-}
-
-
-
-/*** MY ADDITIONS ***/
-
-
-/* 	7 Color Boxes */
-.color-choice {
-	width: 30px;
-	height:30px;
-	float: left;   		/* float to make them line up next to each other */
-	border:1px solid black;	
-	margin-right: 5px;	/* so the color boxes are not sitting right next to each other */
-	cursor:pointer;		/* to make our elements clickable */
+h3 {
+	margin-top:25px;
+	color: teal;
 }
 
 
@@ -101,15 +73,20 @@ h2 {
 	height:		15px;  
 }	
 
-.error#input_error {
+.error#input_error, #trulia_info {
 	font-size: 16px;
 	font-style: italic;
-	margin-top: 18px;
+	margin-top: 20px;
 	text-align: center;
 }
 
+#trulia_info {
+	color: maroon;
+	margin-bottom: 10px;
+}
+
 /* styles specific to web page */
-#input-fields {
+#input-fields, #help_text{
 	font-family:Arial, Helvetica, sans-serif;
 	font-size:20px;
 	text-align:left;
@@ -154,8 +131,6 @@ input[type="text"], input[type="password"], textarea {
 	border-top: 1px dotted grey;
 	margin-top:  15px;
 	padding-top: 20px;
-	
-/*	color:	#FFB735;  (tan) */
 }
 
 #max-offer-label{
@@ -195,8 +170,15 @@ input[type="text"], input[type="password"], textarea {
 
 }
 
-.footer {
+#help_text{
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 17px;
+}	
+
+#footer {
 	clear:both;
+	text-align: center;
+	margin-bottom: 10px;
 }
 
 	 
