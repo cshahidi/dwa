@@ -17,15 +17,17 @@ $(document).ready(function() {	//start doc ready
 	// Show calculator div and hide help div on page load
 	$("#help").hide();
 	
-	// If "Help" button on top is clicked, hide calculator div and show help div
-	$("#help_button_header").click(function() {
+	// If "Help" link on top is clicked, hide calculator div and show help div
+	$("#help_link").click(function() {
 		$("#calculator").hide();
+		$("#finalize-buttons").hide();		
 		$("#help").show();
 	});
 	
-	// If "Calculator" button on top is clicked, show calculator div and hide help div
-	$("#calculator_button_header").click(function() {
+	// If "Calculator" link on top is clicked, show calculator div and hide help div
+	$("#calculator_link").click(function() {
 		$("#calculator").show();
+		$("#finalize-buttons").show();		
 		$("#help").hide();
 	});	
 	

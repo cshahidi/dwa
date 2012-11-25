@@ -16,12 +16,21 @@
 <body>
 	<div id='wrapper'>
 
-		<!-- HEADING -->
-		<h1>House Offer Price Calculator</h1>
+		<div id="main_content">      	<!-- main content -->
 		
-		<div id="calculator">      	<!-- main content -->
+			<!-- HEADING -->		
+			<div id="header">
+				<h1>House Offer Price Calculator</h1>		
+				<div id="nav-header">
+					<ul>
+					  <li><a href="#" id="calculator_link">Calculator</a></li>
+					  <li><a href="#" id="help_link">Help</a></li>
+					</ul>	
+				</div>
+			</div>		
+
 								
-			<div id= "input-fields">
+			<div id= "calculator">
 				<h2>Enter your Info:</h2>			
 
 				<div class="fineprint">
@@ -46,8 +55,8 @@
 				<label for="closing-costs-out">Closing Costs Out ($): <span class="star" >*</span></label>
 				<input id= "closing-costs-out" type="text" maxlength="12" value="3000"/><br><br><br>	
 
-				<!---------------------------------------------------------------------------->
-				<label for="carry-cost"><strong>Carry Cost for 6 months: </strong></label><br><br>		
+				<!-- Carry Cost Section -->
+				<strong>Carry Cost for 6 months: </strong><br><br>		
 
 				<label for="taxes">Taxes ($): <span class="star" >*</span></label>
 				<input id= "taxes" type="text" maxlength="12"/><br><br>		
@@ -74,43 +83,43 @@
 					<input id ="maximum-offer" type="text" maxlength="14" readonly="readonly"/>	
 				</div>
 				
-			</div>   <!-- endiv input-fields -->
+			</div>   <!-- endiv calculator -->
 
 					
 			<!-- Finalize Buttons -->
-			<br><br>
 			<div id="finalize-buttons">
 				<input type="submit" class="button" id="refresh-button" value="Clear All">
 				<input type="submit" class="button" id="calculate-button" value="Calculate">		
 			</div>
 			
-		</div>       <!-- endiv calculator (main) -->
-
-		
-		<div id="help">
-			<div id="help_text">
-				<h2>Help on Using Calculator</h2>
-				
-				<h3>Directions</h3>
-				<p>Enter all values in integer form. All decimal values are rounded to next lowest integer.</p>
-		
-				<h3>Glossary</h3>
-				
-				<p><strong>After Repair Value:</strong> Market price of property after renovation.</p>
-				<p><strong>Profit Goal:</strong> Profit envisioned by investor. Is an expense in this context.</p>
-				<p><strong>Commission:</strong> Paid to agent upon resale of property. Usually 6%, but can vary.</p>
-				<p><strong>Closing Costs:</strong> Legal and other fees upon purchase (in) and sale (out)</p>
-				<p><strong>Principal & Interest:</strong> Mortgage payments envisioned for 6 months.  This 
-				   value is 0 if the purchase is all cash.  If not, user can use the "Subtotal" figure 
-				   displayed after the Calculate button is clicked as the "Property Price" and use the  
-				   Mortgage Calculator at http://www.trulia.com/mortgage-calculators/ to find the monthly 
-				   mortgage.  This value must then be multiplied by 6 to give a six month value to plug 
-				   into the "Principal & Interest" field.
-				</p>
-			</div>   <!-- endiv help_text  -->
 			
-		</div>  <!-- endiv help -->
+			<!-- Help Page -->
+			<div id="help">
+				<div id="help-text">
+					<h2>Help on Using Calculator</h2>
+					
+					<h3>Directions</h3>
+					<p>Enter all values in integer form. All decimal values are rounded to next lowest integer.</p>
+			
+					<h3>Glossary</h3>
+					
+					<p><strong>After Repair Value:</strong> Market price of property after renovation.</p>
+					<p><strong>Profit Goal:</strong> Profit envisioned by investor. Is an expense in this context.</p>
+					<p><strong>Commission:</strong> Paid to agent upon resale of property. Usually 6%, but can vary.</p>
+					<p><strong>Closing Costs:</strong> Legal and other fees upon purchase (in) and sale (out)</p>
+					<p><strong>Principal & Interest:</strong> Mortgage payments envisioned for 6 months.  This 
+					   value is 0 if the purchase is all cash.  If not, user can use the "Subtotal" figure 
+					   displayed after the Calculate button is clicked as the "Property Price" and use the  
+					   Mortgage Calculator at http://www.trulia.com/mortgage-calculators/ to find the monthly 
+					   mortgage.  This value must then be multiplied by 6 to give a six month value to plug 
+					   into the "Principal & Interest" field.
+					</p>
+				</div>   <!-- endiv help-text  -->
+				
+			</div>  <!-- endiv help -->
 	
+		</div>      <!-- endiv main_content -->	
+		
 		<!-- FOOTER -->
 		<div id="footer">Copyright &copy; 2012 Camran Shahidi</div>
 		
