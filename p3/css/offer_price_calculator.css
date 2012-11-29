@@ -6,7 +6,8 @@ body {
 	 background-color: #3D4D7A;		/* light blue background */ 
 	/* Source of background-image: http://students.susanbuck.net/storage/code/_js/card-generator.html */
 	/* background-color: blue;
-	background-image: url("../images/texture_4.png"); */
+	background-image: url("../images/texture_4.png");
+	background-repeat: no-repeat */
 	} 
 
 #wrapper {
