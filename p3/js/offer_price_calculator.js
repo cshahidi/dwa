@@ -1,4 +1,3 @@
-
 $(document).ready(function() {	//start doc ready
 				
 	// Declare Global variables
@@ -196,6 +195,11 @@ $(document).ready(function() {	//start doc ready
 	// "Clear All" Button - Clear all text fields & Error message
 	$("#refresh-button").click(function() {
 	
+		// Suggested edit by SB: Give all elements that can be refreshed a class "refreshable"... 
+		// that way you can clear them all with one line of code, and easily add new elements down the road
+		$(".refreshable").val("");	
+	
+		/*
 		$("#after-repair-value").val("");	
 		$("#profit-goal").val("");	
 		$("#estimated-repairs").val("");	
@@ -210,6 +214,7 @@ $(document).ready(function() {	//start doc ready
 		
 		$("#maximum-offer").val("");
 		$("#input_error").html(""); 
+		*/
 		
 	});	
 	
