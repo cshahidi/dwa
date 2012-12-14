@@ -25,32 +25,39 @@
 	<div id="wrapper">
 		<div id= "menu">
 		
-			<!-- Navigation Menu for users who are logged in -->
+			<!-- Navigation Menu for users who are logged in (either parnter or principal -->
 			<? if($user): ?>
-				<ul class="mainmenu">  <!-- In case we need another menu in future -->
-					<li><a href="/">Home</a></li>	
-					<li><a href="/leads/add">Partners</a> <!-- will later have own landing page -->
-						<ul>
-							<li><a href="leads/add">Add Lead</a></li>
-						</ul>	
-					</li>					  
-					<li><a href="/leads/">Principals</a>
-						<ul>
-							<li><a href="/leads/">View & Track Leads</a></li>
-							<li><a href="/calculator">Offer Price Calculator</a></li>						  
-						</ul>				  
-					</li>				  	  
-					<li><a href='/users/logout'>Logout</a></li>				  
-				</ul>				
-
+				<? if($user->role=="partner"): ?>
+					<ul class="mainmenu">  <!-- In case we need another menu in future -->
+						<li><a href="/">Home</a></li>	
+						<li><a href="/leads/add">Partners</a> <!-- will later have own landing page -->
+							<ul>
+								<li><a href="leads/add">Add Lead</a></li>
+							</ul>	
+						</li>	
+						<li><a href="/future_page/">Investors (TBD)</a></li>
+						<li><a href="/future_page/">Team (TBD)</a></li>
+						<li><a href="/future_page/">Contact Us (TBD)</a></li>
+						<li><a href='/users/logout'>Logout</a></li>		
+					</ul>						
+						
+				<? elseif ($user->role=="principal"): ?>	
+					<ul class="mainmenu"> 				
+						<li><a href="/leads/track">Principals</a>
+							<ul>
+								<li><a href="/leads/track">View & Track Leads</a></li>
+								<li><a href="/calculator">Offer Price Calculator</a></li>						  
+							</ul>				  
+						</li>			
+						<li><a href="/future_page/">Investors (TBD)</a></li>
+						<li><a href="/future_page/">Team (TBD)</a></li>
+						<li><a href="/future_page/">Contact Us (TBD)</a></li>						
+						<li><a href='/users/logout'>Logout</a></li>				  
+					</ul>	
+									
 					
 			<!-- Menu options for users who are NOT logged in -->	
 			<? else: ?>
-				<ul class="mainmenu">  <!-- In case we need another menu in future -->
-					<li><a href='/users/signup'>Sign up</a></li>
-					<li><a href='/users/signup'>Sign up</a></li>	
-					<li><a href='/users/signup'>Sign up</a></li>
-
 				<ul class="mainmenu"> 
 					<li><a href="/">Home</a></li>	
 					<li><a href="/users/signup/partner">Partners</a></li> 	  

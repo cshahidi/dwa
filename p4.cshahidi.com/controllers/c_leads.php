@@ -146,23 +146,18 @@ class posts_controller extends base_controller {
 		echo $this->template;
 	}
 	
+	/* P4 */
 	public function p_add() {
 	
 		# Associate this lead with this user via partner_id. 
-		# Join the "users" and "partners" tables to get partner_id
-		
-		$_POST['user_id'] = $this->user->user_id;
-		
-		# Build query
-		$q = "SELECT 1
-			FROM partners
-			JOIN users USING (user_id)";
 
-		# SELECT 1 just looks for one record and returns TRUE; otherwise NULL when no match.
-		$q = "SELECT 1 
-			FROM users_users
-			WHERE user_id        = ".$this->user->user_id."
-			AND user_id_followed = ".$this->user->user_id;		
+		# Build query to get "partner_id" from partners table based on user_id
+		$q = "SELECT partner_id 
+			FROM partners
+			WHERE user_id = ".$this->user->user_id;			
+			
+		$_POST['partner_id'] = DB::instance(DB_NAME)->select_field($q);
+		echo "Your partner_id is: ".$_POST['partner_id'];
 		
 		# Unix timestamp of when this post was created/modified
 		$_POST['created']  = Time::now();
