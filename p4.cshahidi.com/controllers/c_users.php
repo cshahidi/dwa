@@ -8,10 +8,13 @@ class users_controller extends base_controller {
 	} 
 	
 
-	public function signup() {
+	public function signup($role) {
 		# Setup view
 		$this->template->content = View::instance("v_users_signup");
 		$this->template->title   = "Signup";
+		
+		# Pass data to the view (role is either "partner" or "principal" (plus "admin" later)
+		$this->template->content->role = $role;	
 		
 		# Render template
 		echo $this->template;
@@ -46,10 +49,26 @@ class users_controller extends base_controller {
 		$_POST['created']  = Time::now();
 		$_POST['modified'] = Time::now();
 		$_POST['token']    = sha1(TOKEN_SALT.$_POST['email'].Utils::generate_random_string());
-		
-		
-		# Insert this user into the database
+				
+		# Insert this user into the database ("users" table)
 		$user_id = DB::instance(DB_NAME)->insert("users", $_POST);
+		
+		
+		# Insert this user also into either the "partners" or "principals" table)
+		echo "Your role is: ".$_POST['role'];
+
+		# Prepare our data array to be inserted
+		# In this case, we're only updating one field, so our array only has one entry
+		$data = Array("user_id"  => $user_id);
+			
+		# Do the update		
+		if ($_POST['role'] == 'partner') {
+			DB::instance(DB_NAME)->insert("partners", $data);	
+		}
+		elseif ($_POST['role'] == 'principal') {
+			DB::instance(DB_NAME)->insert("principals", $data);		
+		}	
+		
 		
 		# For now, just confirm they've signed up - we can make this fancier later
 		# Send them back to the login page

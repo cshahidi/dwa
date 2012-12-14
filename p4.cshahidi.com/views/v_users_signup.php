@@ -1,4 +1,4 @@
-<h1>Please Sign up for New Account</h1>
+<h2>Please Sign up for New Account</h2>
 
 <form method="POST" action="/users/p_signup">
 
@@ -19,7 +19,11 @@
 		<input type="password" name="password">
 		<br><br>
 		
-		<input type="submit">
+		<!-- Insert in $_POST the $role variable ("partner" vs "principal") signup() has set -->
+		<input type="hidden" name="role" value="$role")
+		
+		
+		<input type="submit" value="Sign Up">
 	</div>	
 </form>
 		

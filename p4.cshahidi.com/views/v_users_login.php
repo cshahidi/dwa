@@ -33,7 +33,7 @@
 				<br>
 			<? endif; ?>	
 			
-			<input type="submit">
+			<input type="submit" value="Log In">
 		</div> <!-- endiv login-info -->	
 		
 	</form>

@@ -10,13 +10,13 @@
 	<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/jquery-ui.min.js"></script>
 	
 	<!-- Add the JavaScript (jQuery) that finds the current menu item and sets it to active -->
-	<!-- DOESN'T WORK -->
 	<script src="/js/highlightmenu.js" type="text/javascript" > </script>
 				
 	<!-- Global CSS -->
 	<link  href="/css/master.css" rel="stylesheet" type="text/css">
 				
 	<!-- Controller Specific JS/CSS -->
+
 	<!-- <?php echo @$client_files; ?> -->
 	
 </head>
@@ -27,21 +27,38 @@
 		
 			<!-- Navigation Menu for users who are logged in -->
 			<? if($user): ?>
-				<ul id="mainmenu">  <!-- In case we need another menu in future -->
-				  <li><a href="/">Home</a></li>	
-				  <li><a href="/users/profile">Profile</a></li>	
-				  <li><a href='/posts/users/'>Follow or UnFollow</a></li>
-				  <li><a href='/posts/'>View All Posts</a></li>
-				  <li><a href='/posts/myposts'>View My Posts</a></li>
-				  <li><a href='/posts/add'>Add Post</a></li>
-				  <li><a href='/users/logout'>Logout</a></li>					
+				<ul class="mainmenu">  <!-- In case we need another menu in future -->
+					<li><a href="/">Home</a></li>	
+					<li><a href="/leads/add">Partners</a> <!-- will later have own landing page -->
+						<ul>
+							<li><a href="leads/add">Add Lead</a></li>
+						</ul>	
+					</li>					  
+					<li><a href="/leads/">Principals</a>
+						<ul>
+							<li><a href="/leads/">View & Track Leads</a></li>
+							<li><a href="/calculator">Offer Price Calculator</a></li>						  
+						</ul>				  
+					</li>				  	  
+					<li><a href='/users/logout'>Logout</a></li>				  
 				</ul>				
 
 					
-			<!-- Menu options for users who are not logged in -->	
+			<!-- Menu options for users who are NOT logged in -->	
 			<? else: ?>
-				<ul id="mainmenu">  <!-- In case we need another menu in future -->
-				  <li><a href='/users/signup'>Sign up</a></li>	
+				<ul class="mainmenu">  <!-- In case we need another menu in future -->
+					<li><a href='/users/signup'>Sign up</a></li>
+					<li><a href='/users/signup'>Sign up</a></li>	
+					<li><a href='/users/signup'>Sign up</a></li>
+
+				<ul class="mainmenu"> 
+					<li><a href="/">Home</a></li>	
+					<li><a href="/users/signup/partner">Partners</a></li> 	  
+					<li><a href="/users/signup/principal">Principals</a></li>
+					<li><a href="/future_page/">Investors (TBD)</a></li>
+					<li><a href="/future_page/">Team (TBD)</a></li>
+					<li><a href="/future_page/">Contact Us (TBD)</a></li>				  	  			  
+				</ul>						
 				</ul>			
 			<? endif; ?>
 		
