@@ -13,7 +13,7 @@ class users_controller extends base_controller {
 		$this->template->content = View::instance("v_users_signup");
 		$this->template->title   = "Signup";
 		
-		# Pass data to the view (role is either "partner" or "principal" (plus "admin" later)
+		# Pass data to the view (role is either "partner" or "principal". Add "admin" later)
 		$this->template->content->role = $role;	
 		
 		# Render template
@@ -23,7 +23,13 @@ class users_controller extends base_controller {
 	public function p_signup(){
 		# Dump out the results of POST to see what the form submitted
 		//print_r($_POST);
-		
+		# Use framework's Debug library method dump, which uses pretty-printing class called Krumo
+		echo Debug::dump($_POST,"Contents of POST");
+
+		# Sanitize the user entered data to prevent any funny business(re: SQL Injection Attacks)
+		# This is done prior to calling select_field() method.
+		$_POST = DB::instance(DB_NAME)->sanitize($_POST);
+
 		# Encrypt the password
 		$_POST['password'] = sha1(PASSWORD_SALT.$_POST['password']);
 		
@@ -40,8 +46,8 @@ class users_controller extends base_controller {
 		
 		# If we get a token, user has already registered
 		if ($token) {
-			# Send them back to the login page
-			Router::redirect("/users/login/");
+			# Send them back to the Home page
+			Router::redirect("/");
 		}
 		
 		
@@ -69,10 +75,12 @@ class users_controller extends base_controller {
 			DB::instance(DB_NAME)->insert("principals", $data);		
 		}	
 		
+		# Store this token in a cookie. This logs in user so user need not log in as well.
+		# Cookie tells us if this user has been authorized and is logged in. 
+		setcookie("token", $token, strtotime('+1 year'), '/');		
 		
-		# For now, just confirm they've signed up - we can make this fancier later
-		# Send them back to the login page
-		Router::redirect("/users/login/");
+		# Send them back to the Home page
+		Router::redirect("/");
 		
 	}
 	
@@ -92,7 +100,7 @@ class users_controller extends base_controller {
 	
 	public function p_login() {
 	
-		# Sanitize the user entered data to prevent any funny business (re: SQL Injection Attacks)
+		# Sanitize the user entered data to prevent any funny business(re: SQL Injection Attacks)
 		$_POST = DB::instance(DB_NAME)->sanitize($_POST);
 		
 		# Hash submitted password so we can compare it against one in the DB
@@ -139,6 +147,8 @@ class users_controller extends base_controller {
 		}
 	}	
 	
+	
+	/* P4 */
 	public function logout() {
 	
 		# Ensure user is not already logged out. If so, take them to Profile page and exit.

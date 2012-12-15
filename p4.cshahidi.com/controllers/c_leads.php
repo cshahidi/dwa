@@ -119,7 +119,7 @@ class posts_controller extends base_controller {
 		
 	}		
 	
-	
+	/* P4 */	
 	public function add( $add_another_lead = NULL) {
 	
 		# Setup view
