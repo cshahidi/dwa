@@ -11,61 +11,47 @@ class posts_controller extends base_controller {
 		}
 	}
 	
-	
-	public function index() {
-		
-		# Set up view
-		$this->template->content = View::instance('v_posts_index');
-		$this->template->title   = "All Posts";
-		$this->template->content->h1 = "All Posts";
-		
-		# Build a query of the users this user is following - we're only interested in their posts
-		$q = "SELECT * 
-			FROM users_users
-			WHERE user_id = ".$this->user->user_id;
-		
-		# Execute our query, storing the results in a variable $connections
-		$connections = DB::instance(DB_NAME)->select_rows($q);
-		
-		# In order to query for the posts we need, we're going to need a string of user id's, separated by commas
-		# To create this, loop through our connections array
-		$connections_string = "";
-		foreach($connections as $connection) {
-			$connections_string .= $connection['user_id_followed'].",";
-		}
-		
-		if ($connections_string != "") {
-			# At least one connection found
-		
-			# Remove the final comma 
-			$connections_string = substr($connections_string, 0, -1);
-			
-			# Connections string example: 10,7,8 (where the numbers are the user_ids of who this user is following)
+	/* P4 */
+	/* Method sets up display for Leads table for tracking by Principals.  Could also be called index() */
+	public function table() {
 
-			# Now, lets build our query to grab the posts
-			# Get everything from posts, but only get the user_id, first_name and last_name of users.
-			# This way, the "created" field from users won't override the "created" of posts.
-			$q = "SELECT posts.*, users.user_id, users.first_name, users.last_name 
-				FROM posts 
-				JOIN users USING (user_id)
-				WHERE posts.user_id IN (".$connections_string.") /* This is where we use that string of user_ids we created */
-				ORDER BY posts.created DESC";	/* Show posts in reverse chronological (DESC) order */
-				
-			# Run our query, store the results in the variable $posts
-			$posts = DB::instance(DB_NAME)->select_rows($q);
-			
-			# $posts will remain an empty string if User has no connections yet
-		}
-		else {
-			$posts = "";
-		}
+		# Set up view
+		$this->template->content = View::instance('v_leads_table');
+		$this->template->title   = "Lead Tracker | Portside Capital Holdings LLC"; 
+		$this->template->content->h2 = "Lead Tracker (for Internal Use Only)";	
+
 		
-		# Pass data to the view
-		$this->template->content->posts = $posts;
+		# View needs Tablesorter Plugin JS and CSS files, add their paths to this array 
+		$client_files = Array(
+					"/js/tablesorter/themes/blue/style.css",
+					"/js/tablesorter/jquery.tablesorter.js", 
+					);
+
+		$this->template->client_files = Utils::load_client_files($client_files); 	
+
 		
-		# Render view
+		# Builds a query to grab all leads from DB
+		$q = "SELECT * 
+			FROM leads";
+
+		# Run the query, storing the results in $leads array
+		$leads = DB::instance(DB_NAME)->select_rows($q);
+
+		# Set subview to be a view fragment
+		# You're not using the master template.
+		# This is b/c you don't need the doctype, head, full page, etc...
+		# You just need the "stub" of HTML which will get injected into the page
+		$this->template->content->subview  = View::instance("v_leads_table");	
+		
+		# Pass data to the View
+		$this->template->content->subview->leads = $leads; 
+		
+		# Render template 
+		# In subview...Whatever HTML we render is what JS will receive as a result of it's Ajax call	
 		echo $this->template;
-	}	
+			
+	} 	
+	
 	
 	
 	/* Method to show only this users posts, so they can edit the posts */ 
@@ -120,6 +106,7 @@ class posts_controller extends base_controller {
 	}		
 	
 	/* P4 */	
+	/* Lead Generator method */
 	public function add( $add_another_lead = NULL) {
 	
 		# Setup view
@@ -135,8 +122,21 @@ class posts_controller extends base_controller {
 		<script type="text/javascript" src=></script>		
 
 		$client_files = Array(
+
+				<link href="css/form_validation.css" rel="stylesheet" type="text/css" /> # may go before master.css
+	
+				<link href="css/lead_generator.css" rel="stylesheet" type="text/css" />
+			
+				# jQuery Form Validation Plugin 
+				"http://ajax.microsoft.com/ajax/jquery.validate/1.7/jquery.validate.min.js"
+		
+	
+				# Masked Input Plugin (allows the application of a mask for fixed width inputs such as zip & tel) 
+				"js/jquery.maskedinput-1.3.min.js">		
+		
+		
 							"http://ajax.microsoft.com/ajax/jquery.validate/1.7/jquery.validate.min.js"		
-							"js/jquery.maskedinput-1.3.min.js"							
+							"/js/jquery.maskedinput-1.3.min.js"							
 							);
 							
 		$this->template->client_files = Utils::load_client_files($client_files);					
@@ -246,7 +246,23 @@ class posts_controller extends base_controller {
 		Router::redirect("/posts/users");
 
 	}	
+	
+	
+	/* P4 */
+	/* Method called by AJAX to update status (pending, accepted, rejected) in leads table */
+	public function update_status() {
 
+		# Create data array we'll use with the update method (in this case one field) 
+		$data = Array("status" => $_POST['status']);
+	
+		DB::instance(DB_NAME)->update('leads', $data, 'WHERE lead_id = '.$_POST['lead_id']);
+	}	
+
+	/* P4 */
+	/* Method called by AJAX to delete record from leads table */
+	public function delete() {
+		DB::instance(DB_NAME)->delete('leads', 'WHERE lead_id = '.$_POST['lead_id']);
+	}
 		
 }
 
