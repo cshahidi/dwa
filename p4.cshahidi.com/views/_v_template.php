@@ -20,8 +20,7 @@
 	<link  href="/css/master.css" rel="stylesheet" type="text/css">
 				
 	<!-- Controller Specific JS/CSS -->
-
-	<!-- <?php echo @$client_files; ?> -->
+	<?php echo @$client_files; ?> 
 	
 </head>
 
@@ -36,7 +35,7 @@
 		<!-- NAVIGATION MENU -->	
 		<div id= "menu">
 		
-			<!-- Navigation Menu for users who are logged in (either parnter or principal -->
+			<!-- Navigation Menu for users who are logged in (either partner or principal -->
 			<? if($user): ?>
 				<? if($user->role=="partner"): ?>
 					<ul class="mainmenu">  <!-- In case we need another menu in future -->
@@ -65,19 +64,18 @@
 						<li><a href="/future_page/">Contact Us (TBD)</a></li>						
 						<li><a href='/users/logout'>Logout</a></li>				  
 					</ul>	
-									
+				<? endif; ?>					
 					
 			<!-- Menu options for users who are NOT logged in -->	
 			<? else: ?>
 				<ul class="mainmenu"> 
 					<li><a href="/">Home</a></li>	
-					<li><a href="/users/signup/partner">Partners</a></li> 	  
-					<li><a href="/users/signup/principal">Principals</a></li>
+					<li><a href="/users/login/partner">Partners</a></li> 					
+					<li><a href="/users/login/principal">Principals</a></li> 					
 					<li><a href="/future_page/">Investors (TBD)</a></li>
 					<li><a href="/future_page/">Team (TBD)</a></li>
 					<li><a href="/future_page/">Contact Us (TBD)</a></li>				  	  			  
-				</ul>						
-				</ul>			
+				</ul>									
 			<? endif; ?>
 		
 		</div>  <!-- endiv menu -->

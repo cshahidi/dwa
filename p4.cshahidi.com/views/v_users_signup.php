@@ -9,7 +9,6 @@
 		<br>
 		
 		<p>Last Name</p>
-		<input type="text" name="last_name">
 		<input type="text" name="last_name" class="validate[required] text-input" />				
 		<br>
 		

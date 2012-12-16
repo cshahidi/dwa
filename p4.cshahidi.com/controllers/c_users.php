@@ -11,7 +11,7 @@ class users_controller extends base_controller {
 	public function signup($role) {
 		# Setup view
 		$this->template->content = View::instance("v_users_signup");
-		$this->template->title   = "Signup";
+		$this->template->title   = "Signup";	
 		
 		# Load CSS/JS (for new jQuery validation plugin)
 		$client_files = Array(
@@ -19,7 +19,10 @@ class users_controller extends base_controller {
 						"/css/new_form_validation/template.css",
 						"/js/new_form_validation/languages/jquery.validationEngine-en.js",
 						"/js/new_form_validation/jquery.validationEngine.js"
-						);		
+						);	
+
+		$this->template->client_files = Utils::load_client_files($client_files);							
+		
 		
 		# Pass data to the view (role is either "partner" or "principal". Add "admin" later)
 		$this->template->content->role = $role;	
@@ -28,7 +31,8 @@ class users_controller extends base_controller {
 		echo $this->template;
 	}
 	
-	public function p_signup(){
+	public function p_signup(){	
+	
 		# Dump out the results of POST to see what the form submitted
 		//print_r($_POST);
 		# Use framework's Debug library method dump, which uses pretty-printing class called Krumo
@@ -93,8 +97,8 @@ class users_controller extends base_controller {
 	}
 	
 	
-	
-	public function login($error = NULL){
+	/* ------  Login ---------*/
+	public function login($role, $error = NULL){
 		# Setup view
 		$this->template->content = View::instance("v_users_login");
 		$this->template->title   = "Login";
@@ -106,9 +110,11 @@ class users_controller extends base_controller {
 						"/js/new_form_validation/languages/jquery.validationEngine-en.js",
 						"/js/new_form_validation/jquery.validationEngine.js"
 						);
-			
+		
+		$this->template->client_files = Utils::load_client_files($client_files);			
 		
 		# Pass data to the view
+		$this->template->content->role = $role;		
 		$this->template->content->error = $error;
 		
 		# Render template
@@ -142,11 +148,18 @@ class users_controller extends base_controller {
 		
 		# But if we did, login succeeded!
 		else {
-			# Ensure user is not already logged in. If so, take them to Profile page and exit.
+			# Ensure user is not already logged in. 
 			if ($this->user) {
-				# Already logged in; Display the profile view and exit.
+				# Already logged in; If so, take them to appropriate page and exit. 
 				Router::redirect("/users/profile/");
 				
+				if($this->user->role = "partner") {
+					Router::redirect("leads/add/");					
+				}
+				else {
+					# Role is principal
+					Router::redirect("/leads/track/");						
+				}
 				return;    
 			}
 		
