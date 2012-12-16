@@ -1,0 +1,18 @@
+/* Source: Lecture 9, Slide 33, "form2.html" stylesheet for jQuery Validation Plugin. Styles errors, etc */
+  body { margin: 2em; }
+  * { font-family: tahoma,arial,helvetica,sans-serif;}
+  .questionchoices { padding-left: 1em; }
+  legend { font-weight: bold; }
+  input, textarea { border: thin solid black; } 
+
+  /* error class gets applied by jQuery Validate */
+  input.error  { border: thin solid red; }
+  label.error {
+      background: url('images/red_x.gif') no-repeat;
+      padding-left: 16px;
+      margin-left: .3em;
+      color: red;
+  }
+  
+
+  

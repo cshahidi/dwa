@@ -1,7 +1,8 @@
 <!-- Add Lead(Lead Generator) -->	
 
 <h2>New Lead</h2>
-<h3>Lead Generator Input Form</h3>
+<h2>Lead Generator Input Form</h2>
+<h3>Welcome back <?=$user->first_name?>!</h3>
 <p>Please input "Hot Deal" property information below, as accurately as possible. Referral fees
    shall be paid at closing!
 </p>

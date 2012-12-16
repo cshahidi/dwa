@@ -4,6 +4,10 @@
 	<title><?=@$title; ?></title>
 
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />	
+
+	<!-- SEO "meta" description -->
+	<meta name="description" content="Portside Capital Holdings LLC is a private investment company that
+				identifies opportunities in distressed residential real estate for acquisition. " />
 	
 	<!-- Global JS -->
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
@@ -23,6 +27,13 @@
 
 <body>	
 	<div id="wrapper">
+	
+		<!-- HEADER -->
+		<div id="header">
+			<h1>Portside Capital Holdings LLC</h1> 
+		</div> 	
+	
+		<!-- NAVIGATION MENU -->	
 		<div id= "menu">
 		
 			<!-- Navigation Menu for users who are logged in (either parnter or principal -->
@@ -73,16 +84,16 @@
 	
 		<br>
 
+		<!-- MAIN CONTENT -->
 		<div id ="content">
 			<?=$content;?> 
 		</div>	
 		
-		<!-- Footer div ensures that the Content will not flow out of wrapper -->
+		<!-- FOOTER (div ensures that the Content will not flow out of wrapper) -->
 		<div id="footer">
-			Copyright &copy; 2012 CS
+			Copyright &copy; 2012 PORTSIDE CAPITAL HOLDINGS LLC, Camran Shahidi			
 		</div>		
 		
-
 	</div>    <!-- endiv wrapper -->
 </body>
 </html>

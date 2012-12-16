@@ -1,0 +1,42 @@
+/* "body", "h1" and "h2" rules already defined in "master.css" */
+
+fieldset { 
+		border-color: teal;
+		margin-top:	  1.2em;	/* adds some space between fieldset borders */
+	}	
+	   
+	
+legend {
+		color:		teal;
+		font-size:	130%;
+	}
+
+/* For visibility, put teal border around "Name" text input box using label id "fullname" */
+#fullname {  	
+	 /*	border-color: teal;
+		border-style: solid;
+		border-width: 1px; */
+		border: thin solid teal; /* same info as previous 3 pairs; notation from Slide #23 of Class Lecture 4 */
+	}
+
+/* Put teal border around select menu box, as we did for the "Name' text input box */	
+select {  
+		border: thin solid teal;
+	}
+	
+/* New content */
+.fineprint {
+		font-style:	italic;
+		font-size:	80%;
+	}
+	
+.star {
+		color:		red;
+		font-weight:bold;
+	}
+
+
+
+
+
+

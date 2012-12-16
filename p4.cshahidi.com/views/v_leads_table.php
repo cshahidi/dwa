@@ -1,4 +1,4 @@
-/* ====================  v_leads_table ======================== */
+<h3>Welcome back <?=$user->first_name?>! </h3>
 			
 <table class="tablesorter">
   <caption>

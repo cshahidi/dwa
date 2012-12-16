@@ -1,0 +1,14 @@
+/* CSS to accomodate Colorbox positioning & title (which is hidden for this project) */
+#gallery {
+	position:		fixed;
+	top:			300px;
+	right:			16%;
+	font-size:	  	160%;
+	visibility:		hidden;  /* hide "Slideshow" title behind the Colorbox slideshow */
+}
+
+h3, p { 
+	/* Move h3 and p to the left to not overlap the slideshow */
+	margin-right:	28%;
+}
+

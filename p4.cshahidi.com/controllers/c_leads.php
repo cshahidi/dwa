@@ -122,22 +122,13 @@ class posts_controller extends base_controller {
 		<script type="text/javascript" src=></script>		
 
 		$client_files = Array(
-
-				<link href="css/form_validation.css" rel="stylesheet" type="text/css" /> # may go before master.css
-	
-				<link href="css/lead_generator.css" rel="stylesheet" type="text/css" />
-			
-				# jQuery Form Validation Plugin 
-				"http://ajax.microsoft.com/ajax/jquery.validate/1.7/jquery.validate.min.js"
-		
-	
-				# Masked Input Plugin (allows the application of a mask for fixed width inputs such as zip & tel) 
-				"js/jquery.maskedinput-1.3.min.js">		
-		
-		
-							"http://ajax.microsoft.com/ajax/jquery.validate/1.7/jquery.validate.min.js"		
-							"/js/jquery.maskedinput-1.3.min.js"							
-							);
+					"/css/form_validation.css", # may go before master.css (May Replace)
+					"/css/lead_generator.css",
+					# jQuery Form Validation Plugin 
+					"http://ajax.microsoft.com/ajax/jquery.validate/1.7/jquery.validate.min.js",
+					# Masked Input Plugin (allows application of a mask for fixed width inputs such as zip & tel) 
+					"/js/jquery.maskedinput-1.3.min.js",								
+					);
 							
 		$this->template->client_files = Utils::load_client_files($client_files);					
 				
