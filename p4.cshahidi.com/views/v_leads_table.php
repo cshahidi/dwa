@@ -1,4 +1,4 @@
-<h3>Welcome back <?=$user->first_name?>! </h3>
+<h3>Welcome back <?=$user->first_name?>!</h3>
 			
 <table class="tablesorter">
   <caption>
@@ -101,12 +101,12 @@
 			url: '/leads/update_status/',
 			success: function(response) { 
 				
-				// Fade out this toy row since it has now been deleted
+				// Fade out this lead row since it has now been deleted
 				// $('#lead_row_' + lead_id).hide('slow');					
-				$('#lead_row_' + lead_id + '_status').hide('slow');		
+				//$('#lead_row_' + lead_id + '_status').hide('slow');		
 
 				// Update the status field in this row
-				$('#lead_row_' + lead_id + '_status').hide('slow');					
+				//$('#lead_row_' + lead_id + '_status').hide('slow');					
 			},
 			data: {
 				// Make sure we tell our method the lead_id and status 
