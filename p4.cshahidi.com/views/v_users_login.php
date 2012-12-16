@@ -12,17 +12,17 @@
 -->
 	  
 <div class="login-box">
-	<form method= "POST" action="/users/p_login/<? if(isset($destination)) echo "?destination=".$destination; ?>">		
+	<form id="form_ID" class="formular" method="POST" action="/users/p_login/<? if(isset($destination)) echo "?destination=".$destination; ?>">		
 
 		<div class="login-info">	
 			<h2>Log in:</h2>
 		
-			<p>Email</p>
-			<input type="text" name="email">
+			<p>Email</p>       <!-- validation based on new jQuery Validation plugin -->
+			<input type="text" name="email" class="validate[required,custom[email]] text_input" id="email">
 			<br><br>
 			
 			<p>Password</p>
-			<input type="password" name="password">
+			<input type="password" name="password" class="validate[required] text_input" id="password">
 			<br><br>
 
 			<!-- $error defined in login() method; not defined in index() method for landing page. Suppress it -->	
@@ -39,3 +39,11 @@
 	</form>
 </div>
 
+
+<!-- Use new jQuery validation Plugin script -->
+<script type='text/javascript'>
+
+	// binds form submission and fields to the validation engine
+	$("#formID").validationEngine('attach');
+
+</script>	

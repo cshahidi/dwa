@@ -1,6 +1,7 @@
 <h2>Please Sign up for New Account</h2>
 
-<form method="POST" action="/users/p_signup">
+<!-- "form_ID" and class "formular" are for new jQuery Validation plugin -->
+<form id="form_ID" class="formular" method="POST" action="/users/p_signup">
 
 	<div class="login-info">
 		<p>First Name</p>
@@ -26,4 +27,13 @@
 		<input type="submit" value="Sign Up">
 	</div>	
 </form>
+
+
+<!-- Use new jQuery validation Plugin script -->
+<script type='text/javascript'>
+
+	// binds form submission and fields to the validation engine
+	$("#formID").validationEngine('attach');
+
+</script>	
 		

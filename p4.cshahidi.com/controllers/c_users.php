@@ -13,6 +13,14 @@ class users_controller extends base_controller {
 		$this->template->content = View::instance("v_users_signup");
 		$this->template->title   = "Signup";
 		
+		# Load CSS/JS (for new jQuery validation plugin)
+		$client_files = Array(
+						"/css/new_form_validation/validationEngine.jquery.css",
+						"/css/new_form_validation/template.css",
+						"/js/new_form_validation/languages/jquery.validationEngine-en.js",
+						"/js/new_form_validation/jquery.validationEngine.js"
+						);		
+		
 		# Pass data to the view (role is either "partner" or "principal". Add "admin" later)
 		$this->template->content->role = $role;	
 		
@@ -90,6 +98,15 @@ class users_controller extends base_controller {
 		# Setup view
 		$this->template->content = View::instance("v_users_login");
 		$this->template->title   = "Login";
+		
+		# Load CSS/JS (for new jQuery validation plugin)
+		$client_files = Array(
+						"/css/new_form_validation/validationEngine.jquery.css",
+						"/css/new_form_validation/template.css",
+						"/js/new_form_validation/languages/jquery.validationEngine-en.js",
+						"/js/new_form_validation/jquery.validationEngine.js"
+						);
+			
 		
 		# Pass data to the view
 		$this->template->content->error = $error;

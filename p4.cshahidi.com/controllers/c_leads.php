@@ -18,13 +18,13 @@ class posts_controller extends base_controller {
 		# Set up view
 		$this->template->content = View::instance('v_leads_table');
 		$this->template->title   = "Lead Tracker | Portside Capital Holdings LLC"; 
-		$this->template->content->h2 = "Lead Tracker (for Internal Use Only)";	
+		$this->template->content->h2 = "Lead Tracker (for Internal Use Only)";			
 
 		
 		# View needs Tablesorter Plugin JS and CSS files, add their paths to this array 
 		$client_files = Array(
 					"/js/tablesorter/themes/blue/style.css",
-					"/js/tablesorter/jquery.tablesorter.js", 
+					"/js/tablesorter/jquery.tablesorter.js"
 					);
 
 		$this->template->client_files = Utils::load_client_files($client_files); 	
@@ -127,7 +127,7 @@ class posts_controller extends base_controller {
 					# jQuery Form Validation Plugin 
 					"http://ajax.microsoft.com/ajax/jquery.validate/1.7/jquery.validate.min.js",
 					# Masked Input Plugin (allows application of a mask for fixed width inputs such as zip & tel) 
-					"/js/jquery.maskedinput-1.3.min.js",								
+					"/js/jquery.maskedinput-1.3.min.js"								
 					);
 							
 		$this->template->client_files = Utils::load_client_files($client_files);					
@@ -210,13 +210,6 @@ class posts_controller extends base_controller {
 		
 		# Do the insert
 		DB::instance(DB_NAME)->insert('users_users', $data);
-
-		# Case where user is viewing their own posts via myposts() and just started Following themselves
-		# NEED TO FIGURE THIS OUT
-		/*if () {
-			Router::redirect("/posts/myposts");
-		}
-		*/
 		
 		# Send them back
 		Router::redirect("/posts/users");
