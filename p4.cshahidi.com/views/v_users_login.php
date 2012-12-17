@@ -19,11 +19,11 @@
 		
 			<p>Email</p>       <!-- validation based on new jQuery Validation plugin -->
 			<input type="text" name="email" class="validate[required,custom[email]] text_input" id="email">
-			<br><br>
+			<br>
 			
 			<p>Password</p>
 			<input type="password" name="password" class="validate[required] text_input" id="password">
-			<br><br>
+			<br>
 
 			<!-- $error defined in login() method; not defined in index() method for landing page. Suppress it -->	
 			<? if(@$error): ?>    
@@ -36,6 +36,9 @@
 			<input type="submit" value="Log In">
 		</div> <!-- endiv login-info -->	
 		
+		<!-- $role defined in login() method: Either partner or principal -->			
+		<p>New User?</p>
+		<div id="signup"><a href="/users/signup/<?=$role?>">Signup</a></div>
 	</form>
 </div>
 

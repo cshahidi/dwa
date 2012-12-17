@@ -1,8 +1,7 @@
 <!-- Add Lead(Lead Generator) -->	
 
-<h2>New Lead</h2>
 <h2>Lead Generator Input Form</h2>
-<h3>Welcome back <?=$user->first_name?>!</h3>
+<h3>Welcome back <?=$user->first_name?>! Please Add New Lead</h3>
 <p>Please input "Hot Deal" property information below, as accurately as possible. Referral fees
    shall be paid at closing!
 </p>
@@ -102,8 +101,8 @@
 			</p>
 			  
 			<p>
-			  <label for="yearbuilt">Year Built <span class="star" >*</span></label> <br>
-			  <input type="text" id="yearbuilt" name="yearbuilt" size="25"/> </p>					  
+			  <label for="year_built">Year Built <span class="star" >*</span></label> <br>
+			  <input type="text" id="year_built" name="year_built" size="25"/> </p>					  
 			
 			<p id="picture">Picture <span class="fineprint">(optional) </span><br>
 			  <input type="file" name="picture" />
@@ -137,7 +136,7 @@
 </form>
 
 
-// JQuery form validation plugin
+<!-- JQuery form validation plugin -->
 <script type="text/javascript">
 
 	// Set up rules 

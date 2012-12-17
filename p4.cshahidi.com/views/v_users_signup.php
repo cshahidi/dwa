@@ -20,8 +20,8 @@
 		<input type="password" name="password" class="validate[required] text_input" id="password">		
 		<br><br>
 		
-		<!-- Insert in $_POST the $role variable ("partner" vs "principal") that signup() has set -->
-		<input type="hidden" name="role" value="$role">
+		<!-- Insert in $_POST the $role variable ("partner" vs "principal") that login() has set -->
+		<input type="hidden" name="role" value="<?=$role?>">
 		
 		
 		<input type="submit" value="Sign Up">

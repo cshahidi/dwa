@@ -7,7 +7,7 @@ class users_controller extends base_controller {
 		// echo "You are accessing the User's controller<br>";
 	} 
 	
-
+	/* ------  Signup ---------*/
 	public function signup($role) {
 		# Setup view
 		$this->template->content = View::instance("v_users_signup");
@@ -58,8 +58,8 @@ class users_controller extends base_controller {
 		
 		# If we get a token, user has already registered
 		if ($token) {
-			# Send them back to the Home page
-			Router::redirect("/");
+			# Send them to the proper page 
+			$this->send_to_proper_dashboard();				
 		}
 		
 		
@@ -73,7 +73,6 @@ class users_controller extends base_controller {
 		
 		
 		# Insert this user also into either the "partners" or "principals" table)
-		echo "Your role is: ".$_POST['role'];
 
 		# Prepare our data array to be inserted
 		# In this case, we're only updating one field, so our array only has one entry
@@ -91,8 +90,8 @@ class users_controller extends base_controller {
 		# Cookie tells us if this user has been authorized and is logged in. 
 		setcookie("token", $token, strtotime('+1 year'), '/');		
 		
-		# Send them back to the Home page
-		Router::redirect("/");
+		# Otherwise, send them to the proper page 
+		$this->send_to_proper_dashboard();			
 		
 	}
 	
@@ -111,10 +110,10 @@ class users_controller extends base_controller {
 						"/js/new_form_validation/jquery.validationEngine.js"
 						);
 		
-		$this->template->client_files = Utils::load_client_files($client_files);			
+		$this->template->client_files = Utils::load_client_files($client_files);				
 		
 		# Pass data to the view
-		$this->template->content->role = $role;		
+		$this->template->content->role  = $role;		
 		$this->template->content->error = $error;
 		
 		# Render template
@@ -143,23 +142,15 @@ class users_controller extends base_controller {
 		# If we didn't get a token, login failed
 		if ($token == "") {
 			# Send them back to the login page if (!$token)
-			Router::redirect("/users/login/error"); # Note the addition of the parameter "error"			
+			Router::redirect("/users/login/role/error"); # Note addition of parameters "role" & "error"			
 		}
 		
 		# But if we did, login succeeded!
 		else {
 			# Ensure user is not already logged in. 
 			if ($this->user) {
-				# Already logged in; If so, take them to appropriate page and exit. 
-				Router::redirect("/users/profile/");
-				
-				if($this->user->role = "partner") {
-					Router::redirect("leads/add/");					
-				}
-				else {
-					# Role is principal
-					Router::redirect("/leads/track/");						
-				}
+				# Already logged in; If so, take them to appropriate login page and exit. 
+				$this->send_to_proper_dashboard();
 				return;    
 			}
 		
@@ -171,14 +162,26 @@ class users_controller extends base_controller {
 				Router::redirect($_GET['destination']);
 			}
 			else {
-				# Otherwise, send them to the main page 
-				Router::redirect("/");
+				# Otherwise, send them to the proper dashboard page 
+				$this->send_to_proper_dashboard();				
 			}			
 		}
 	}	
 	
+	/* Send user to proper login page */
+	public function send_to_proper_dashboard() {
 	
-	/* P4 */
+		if($this->user->role = "partner") {
+			Router::redirect("/leads/add");					
+		}
+		else {
+			# Role is principal
+			Router::redirect("/leads/track");						
+		}
+	}
+		
+	
+	/* ------  Logout ---------*/
 	public function logout() {
 	
 		# Ensure user is not already logged out. If so, take them to Profile page and exit.
@@ -224,33 +227,15 @@ class users_controller extends base_controller {
 		
 		# Return will prevent anything else from happening in this controller
 		return;		
-		
-		
-		# Create view template with the login form; this option didn't retain message and 
-		//$this->template->content          = View::instance("v_users_login");
-		//$this->template->content->message = "You don't have access to view this page. Please login.";
-		//$this->template->content->destination   = "/users/profile";
-		//$this->template->title            = "Login";
-		
-		# Send them back to the login page
-		//Router::redirect("/users/login/");		
+				
 	}
 		
 	# Setup view
 	$this->template->content = View::instance('v_users_profile');
 	$this->template->title   = "Profile of ".$this->user->first_name;
 	
-	# Load CSS/JS
-	/* $client_files = Array(
-						"/css/users.css",
-						"/js/users.js",
-						);
-						
-	$this->template->client_files = Utils::load_client_files($client_files);					
-	*/
-	
 	#Render template
 	echo $this->template;
 	}
-	
+			
 } # end of the class
