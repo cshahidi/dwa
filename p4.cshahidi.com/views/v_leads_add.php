@@ -2,18 +2,19 @@
 
 <h2>Lead Generator Input Form</h2>
 <h3>Welcome back <?=$user->first_name?>! Please Add New Lead</h3>
+
+<? if($add_another_lead): ?>
+	<div class="msg">
+		Your lead has been added. Add another?
+	</div>
+	<br>
+<? endif; ?>
+	
 <p>Please input "Hot Deal" property information below, as accurately as possible. Referral fees
    shall be paid at closing!
 </p>
 
 <form id="leadsForm" method="POST" action="/leads/p_add">
-
-	<? if($add_another_lead): ?>
-		<div class="msg">
-			Your post has been added. Add another?
-		</div>
-		<br>
-	<? endif; ?>
 
 	  <fieldset>
 		<legend>Property Information</legend>

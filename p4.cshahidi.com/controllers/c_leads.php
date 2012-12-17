@@ -16,7 +16,7 @@ class leads_controller extends base_controller {
 	public function track() {
 
 		# Set up view
-		$this->template->content = View::instance('v_leads_table');
+		$this->template->content = View::instance('v_leads_track');
 		$this->template->title   = "Lead Tracker | Portside Capital Holdings LLC"; 
 		$this->template->content->h2 = "Lead Tracker (for Internal Use Only)";			
 
@@ -36,15 +36,18 @@ class leads_controller extends base_controller {
 
 		# Run the query, storing the results in $leads array
 		$leads = DB::instance(DB_NAME)->select_rows($q);
+		
+		# Pass data to the View (No Ajax when building original table; just later updating)
+		$this->template->content->leads = $leads; 					
 
 		# Set subview to be a view fragment
 		# You're not using the master template.
 		# This is b/c you don't need the doctype, head, full page, etc...
 		# You just need the "stub" of HTML which will get injected into the page
-		$this->template->content->subview  = View::instance("v_leads_table");	
+		#$this->template->content->subview  = View::instance("v_leads_track");	
 		
 		# Pass data to the View
-		$this->template->content->subview->leads = $leads; 
+		#$this->template->content->subview->leads = $leads; 
 		
 		# Render template 
 		# In subview...Whatever HTML we render is what JS will receive as a result of it's Ajax call	
@@ -110,7 +113,7 @@ class leads_controller extends base_controller {
 		# echo "Your lead has been added. <a href='/lead/add'>Add another?</a>";
 		
 		# Pass data Send them back if they wish to add any other leads
-		Router::redirect("/leads/add/add_another_post?"); # pass parameter "add_another_post?" string
+		Router::redirect("/leads/add/add_another_lead?"); # pass parameter "add_another_lead?" string
 	}
 		
 	

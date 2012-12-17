@@ -25,7 +25,7 @@
 		<tr id="lead_row_<?=$lead['lead_id']?>">				
 			<td><?=$lead['lead_id']?></td>
 			<td><?=Time::display($lead['created'])?>  </td> 		 <!-- Time & Date entered -->
-			<td><?=$lead['street_address']?></td>  
+			<td><?=$lead['address']?></td>  
 			<td><?=$lead['city']?></td>
 			<td><?=$lead['state']?></td>
 			<td id="lead_row_<?=$lead['lead_id']?>_status>">     

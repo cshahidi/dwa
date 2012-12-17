@@ -45,23 +45,24 @@
 								<li><a href="leads/add">Add Lead</a></li>
 							</ul>	
 						</li>	
-						<li><a href="/future_page/">Investors (TBD)</a></li>
-						<li><a href="/future_page/">Team (TBD)</a></li>
-						<li><a href="/future_page/">Contact Us (TBD)</a></li>
+						<li><a href="/futurepage/">Investors (TBD)</a></li>
+						<li><a href="/futurepage/">Team (TBD)</a></li>
+						<li><a href="/futurepage/">Contact Us (TBD)</a></li>
 						<li><a href='/users/logout'>Logout</a></li>		
 					</ul>						
 						
 				<? elseif ($user->role=="principal"): ?>	
-					<ul class="mainmenu"> 				
+					<ul class="mainmenu"> 
+						<li><a href="/">Home</a></li>						
 						<li><a href="/leads/track">Principals</a>
 							<ul>
 								<li><a href="/leads/track">View & Track Leads</a></li>
 								<li><a href="/calculator">Offer Price Calculator</a></li>						  
 							</ul>				  
 						</li>			
-						<li><a href="/future_page/">Investors (TBD)</a></li>
-						<li><a href="/future_page/">Team (TBD)</a></li>
-						<li><a href="/future_page/">Contact Us (TBD)</a></li>						
+						<li><a href="/futurepage/">Investors (TBD)</a></li>
+						<li><a href="/futurepage/">Team (TBD)</a></li>
+						<li><a href="/futurepage/">Contact Us (TBD)</a></li>						
 						<li><a href='/users/logout'>Logout</a></li>				  
 					</ul>	
 				<? endif; ?>					
@@ -72,9 +73,9 @@
 					<li><a href="/">Home</a></li>	
 					<li><a href="/users/login/partner">Partners</a></li> 					
 					<li><a href="/users/login/principal">Principals</a></li> 					
-					<li><a href="/future_page/">Investors (TBD)</a></li>
-					<li><a href="/future_page/">Team (TBD)</a></li>
-					<li><a href="/future_page/">Contact Us (TBD)</a></li>				  	  			  
+					<li><a href="/futurepage/">Investors (TBD)</a></li>
+					<li><a href="/futurepage/">Team (TBD)</a></li>
+					<li><a href="/futurepage/">Contact Us (TBD)</a></li>				  	  			  
 				</ul>									
 			<? endif; ?>
 		
