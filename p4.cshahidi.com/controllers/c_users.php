@@ -59,7 +59,7 @@ class users_controller extends base_controller {
 		# If we get a token, user has already registered
 		if ($token) {
 			# Send them to the proper page 
-			$this->send_to_proper_dashboard();				
+			$this->send_to_proper_dashboard($_POST['role']);				
 		}
 		
 		
@@ -91,7 +91,7 @@ class users_controller extends base_controller {
 		setcookie("token", $token, strtotime('+1 year'), '/');		
 		
 		# Otherwise, send them to the proper page 
-		$this->send_to_proper_dashboard();			
+		$this->send_to_proper_dashboard($_POST['role']);			
 		
 	}
 	
@@ -111,6 +111,8 @@ class users_controller extends base_controller {
 						);
 		
 		$this->template->client_files = Utils::load_client_files($client_files);				
+		
+		//echo "Your role is ".$role;		
 		
 		# Pass data to the view
 		$this->template->content->role  = $role;		
@@ -150,7 +152,7 @@ class users_controller extends base_controller {
 			# Ensure user is not already logged in. 
 			if ($this->user) {
 				# Already logged in; If so, take them to appropriate login page and exit. 
-				$this->send_to_proper_dashboard();
+				$this->send_to_proper_dashboard($this->user->role);
 				return;    
 			}
 		
@@ -163,15 +165,15 @@ class users_controller extends base_controller {
 			}
 			else {
 				# Otherwise, send them to the proper dashboard page 
-				$this->send_to_proper_dashboard();				
+				$this->send_to_proper_dashboard($_POST['role']);				
 			}			
 		}
 	}	
 	
 	/* Send user to proper login page */
-	public function send_to_proper_dashboard() {
-	
-		if($this->user->role = "partner") {
+	public function send_to_proper_dashboard($role) {
+		echo "Your role is: ".$role;
+		if($role == "partner") {
 			Router::redirect("/leads/add");					
 		}
 		else {
