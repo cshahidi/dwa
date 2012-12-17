@@ -1,7 +1,7 @@
 <h2>Please Sign up for New Account</h2>
 
 <!-- "form_ID" and class "formular" are for new jQuery Validation plugin -->
-<form id="form_ID" class="formular" method="POST" action="/users/p_signup">
+<form id="formID" class="formular" method="POST" action="/users/p_signup">
 
 	<div class="login-info">
 		<p>First Name</p>

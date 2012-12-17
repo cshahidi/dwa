@@ -36,7 +36,7 @@ class users_controller extends base_controller {
 		# Dump out the results of POST to see what the form submitted
 		//print_r($_POST);
 		# Use framework's Debug library method dump, which uses pretty-printing class called Krumo
-		echo Debug::dump($_POST,"Contents of POST");
+		//echo Debug::dump($_POST,"Contents of POST");
 
 		# Sanitize the user entered data to prevent any funny business(re: SQL Injection Attacks)
 		# This is done prior to calling select_field() method.
@@ -144,7 +144,9 @@ class users_controller extends base_controller {
 		# If we didn't get a token, login failed
 		if ($token == "") {
 			# Send them back to the login page if (!$token)
-			Router::redirect("/users/login/role/error"); # Note addition of parameters "role" & "error"			
+			$role = $_POST['role'];  
+			$url = "/users/login/".$role."/error";
+			Router::redirect($url);  # Note addition of parameters "role" & "error"				
 		}
 		
 		# But if we did, login succeeded!

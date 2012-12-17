@@ -12,7 +12,7 @@
 -->
 	  
 <div class="login-box">
-	<form id="form_ID" class="formular" method="POST" action="/users/p_login/<? if(isset($destination)) echo "?destination=".$destination; ?>">		
+	<form id="formID" class="formular" method="POST" action="/users/p_login/<? if(isset($destination)) echo "?destination=".$destination; ?>">		
 
 		<div class="login-info">	
 			<h2>Log in:</h2>
@@ -55,3 +55,5 @@
 	$("#formID").validationEngine('attach');
 
 </script>	
+
+
