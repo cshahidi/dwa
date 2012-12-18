@@ -10,7 +10,7 @@
 	such as foreclosures. Portside will be funded by a pool of private money investors, 
 	both active and passive. The principals will be actively involved in managing the real estate 
 	portfolio.
-</p> <br>
+</p> 
 <h3>PARTNER RELATIONSHIP</h3>
 <p>
 	Portside Capital Holdings LLC owes much of its success to our partners. Partners are direct sellers
