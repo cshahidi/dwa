@@ -86,8 +86,6 @@ class users_controller extends base_controller {
 			DB::instance(DB_NAME)->insert("principals", $data);		
 		}	
 		
-		# Call p_login() to authenticate user and make userObj available
-		$this->p_login();
 		
 		# Store this token in a cookie. This logs in user so user need not log in as well.
 		# Cookie tells us if this user has been authorized and is logged in. 
