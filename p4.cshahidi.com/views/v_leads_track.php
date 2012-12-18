@@ -1,3 +1,4 @@
+<h2>Lead Tracker (for Internal Use Only)</h2>
 <h3>Welcome back <?=$user->first_name?>!</h3>
 			
 <table class="tablesorter">

@@ -7,7 +7,7 @@ class leads_controller extends base_controller {
 					
 		# Make sure user is logged in if they want to use anything in this controller
 		if (!$this->user) {
-			die("Members only. <a href='/users/login'>Login</a>");
+			die("Members only. <a href='/users/login/'>Login</a>");
 		}
 	}
 	
@@ -17,9 +17,7 @@ class leads_controller extends base_controller {
 
 		# Set up view
 		$this->template->content = View::instance('v_leads_track');
-		$this->template->title   = "Lead Tracker | Portside Capital Holdings LLC"; 
-		$this->template->content->h2 = "Lead Tracker (for Internal Use Only)";			
-
+		$this->template->title   = "Lead Tracker | Portside Capital Holdings LLC"; 		
 		
 		# View needs Tablesorter Plugin JS and CSS files, add their paths to this array 
 		$client_files = Array(

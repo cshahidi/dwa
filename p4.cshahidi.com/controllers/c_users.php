@@ -154,7 +154,7 @@ class users_controller extends base_controller {
 		else {
 			# Ensure user is not already logged in. 
 			if ($this->user) {
-				# Already logged in; If so, take them to appropriate login page and exit. 
+				# Already logged in; If so, take them to appropriate dashboard and exit. 
 				$this->send_to_proper_dashboard($this->user->role);
 				return;    
 			}

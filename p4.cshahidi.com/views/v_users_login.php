@@ -1,4 +1,6 @@
-<!-- Display any message set by profile(), if user has not logged in -->
+<h2>Please Log In for Access</h2>
+
+<!-- P2: Display any message set by profile(), if user has not logged in -->
 <h3><? if(isset($message)) echo $message; ?></h3><br><br>
 
 <!--  If the $destination is set, we want to append it as a query string to the url so it sends user to 
