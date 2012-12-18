@@ -6,12 +6,13 @@
   </caption>
   <thead>
 	<tr>
-	  <th>#</th>
+	  <th>Lead #</th>
 	  <th>Date Entered</th>
 	  <th>Street Address</th>
 	  <th>City</th>
 	  <th>State</th>
 	  <th>Status</th>
+	  <th>Delete</th>	  
 	</tr>
   </thead>
   
@@ -27,7 +28,7 @@
 			<td><?=Time::display($lead['created'])?>  </td> 		 <!-- Time & Date entered -->
 			<td><?=$lead['address']?></td>  
 			<td><?=$lead['city']?></td>
-			<td><?=$lead['state']?></td>
+			<td><?=$lead['state']?></td>	
 			<td id="lead_row_<?=$lead['lead_id']?>_status>">     
 			
 				<!-- Make this modifiable (Pending, Accepted, Rejected) -->	
@@ -47,16 +48,23 @@
 			<td><input type='button' class='delete' data-lead-id="<?=$lead['lead_id']?>" 
 				 value='Delete Lead'>
 			</td>
+		</tr>	
 
 	<? endforeach; ?>
   </tbody>		  
+</table>  
 		  
 		
 		
-<!-- Use Ajax to do the row deletion and then have JS visually remove that row from the table (Susan) -->
-<!-- This avoids re-rendering the whole table after deleting a record -->
+
 <script type='text/javascript'>
 
+    // Set up Tablesorter
+	$("table.tablesorter").tablesorter({widgets: ['zebra']}); 
+
+
+	// Use Ajax to do the row deletion and then have JS visually remove that row from the table (Susan)
+	// This avoids re-rendering the whole table after deleting a record
 	$('.delete').click(function() {
 		
 		// Figure out the lead_id based on the data attribute
@@ -73,7 +81,7 @@
 			},
 			data: {
 				// Make sure we tell our method what the lead_id is
-				lead_id: lead_id;
+				lead_id: lead_id,
 			},
 		});
 		
@@ -82,11 +90,7 @@
 
 		
 		
-<!-- Use Ajax to change "status" field drop-down and then have JS visually change it -->
-
-  	<select name="status" class="status" data-lead-id="<?=$lead['lead_id']?>" 
-										 data-status-value="<?=$lead['status']?>">
-  
+	// Use Ajax to change "status" field drop-down and then have JS visually change it   
 	$('.status').change(function() {
 		
 		// Figure out the lead_id based on the data attribute
@@ -100,18 +104,14 @@
 			type: 'POST',
 			url: '/leads/update_status/',
 			success: function(response) { 
-				
-				// Fade out this lead row since it has now been deleted
-				// $('#lead_row_' + lead_id).hide('slow');					
-				//$('#lead_row_' + lead_id + '_status').hide('slow');		
-
-				// Update the status field in this row
-				//$('#lead_row_' + lead_id + '_status').hide('slow');					
+					
+				// Update the status field in this row? Already have changed it!
+				//$('#lead_row_' + lead_id + '_status').<<<change select option>>>;					
 			},
 			data: {
 				// Make sure we tell our method the lead_id and status 
-				lead_id: lead_id;				
-				status: status;
+				lead_id: lead_id,			
+				status: status,
 			},
 		});
 		

@@ -1,0 +1,21 @@
+/* This is mostly for the Table */
+/* "body", "h1" and "h2" rules already defined in "master.css" */
+
+body {
+	margin-left: 5%;
+	margin-right: 5%;
+	font-family: Calibri, Verdana, Arial, sans-serif;
+}
+table {
+	width: 100%;
+	border-collapse: collapse; 
+}
+table td {
+	border: thin solid black;
+}
+caption { font-weight: bold; font-size: 160%; background-color: teal; color: white; margin-top: 30px;}
+
+/* Delete Button */
+.delete {
+	cursor: pointer;	
+}

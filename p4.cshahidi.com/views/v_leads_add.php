@@ -103,11 +103,15 @@
 			  
 			<p>
 			  <label for="year_built">Year Built <span class="star" >*</span></label> <br>
-			  <input type="text" id="year_built" name="year_built" size="25"/> </p>					  
+			  <input type="text" id="year_built" name="year_built" size="25"/> 
+			</p>					  
 			
+			<!-- Future: Store link (not image) in DB
 			<p id="picture">Picture <span class="fineprint">(optional) </span><br>
 			  <input type="file" name="picture" />
 			</p>
+			-->
+			
 	   </fieldset>
 
 		  

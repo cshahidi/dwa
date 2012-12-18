@@ -24,7 +24,8 @@ class leads_controller extends base_controller {
 		# View needs Tablesorter Plugin JS and CSS files, add their paths to this array 
 		$client_files = Array(
 					"/js/tablesorter/themes/blue/style.css",
-					"/js/tablesorter/jquery.tablesorter.js"
+					"/js/tablesorter/jquery.tablesorter.js",
+					"/css/leads_track.css"
 					);
 
 		$this->template->client_files = Utils::load_client_files($client_files); 	
