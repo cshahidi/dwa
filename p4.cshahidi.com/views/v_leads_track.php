@@ -98,6 +98,10 @@
 		
 		// Figure out the status (pending, accepted, rejected) based on the data attribute
 		var status = $(this).attr('data-status-value');  
+        var status =  $(this).attr("selected");
+		var status = $('select.status option:selected').val();
+  	
+		console.log(status);
 	
 		// Call update_status method in leads controller to do the ajax work of updating status in DB
 		$.ajax({

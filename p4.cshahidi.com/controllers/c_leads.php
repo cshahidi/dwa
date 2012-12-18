@@ -120,7 +120,7 @@ class leads_controller extends base_controller {
 	
 	/* Method called by AJAX to update status (pending, accepted, rejected) in leads table */
 	public function update_status() {
-
+	
 		# Create data array we'll use with the update method (in this case one field) 
 		$data = Array("status" => $_POST['status']);
 	

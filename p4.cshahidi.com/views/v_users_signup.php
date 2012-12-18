@@ -6,19 +6,16 @@
 	<div class="login-info">
 		<p>First Name</p>
 		<input type="text" name="first_name" class="validate[required] text-input" />		
-		<br>
 		
 		<p>Last Name</p>
 		<input type="text" name="last_name" class="validate[required] text-input" />				
-		<br>
 		
 		<p>Email</p>
 		<input type="text" name="email" class="validate[required,custom[email]] text_input" id="email">		
-		<br>
 		
 		<p>Password</p>
 		<input type="password" name="password" class="validate[required] text_input" id="password">		
-		<br><br>
+		<br>
 		
 		<!-- Insert in $_POST the $role variable ("partner" vs "principal") that login() has set -->
 		<input type="hidden" name="role" value="<?=$role?>">
