@@ -56,7 +56,10 @@ class users_controller extends base_controller {
 		
 		$token = DB::instance(DB_NAME)->select_field($q);
 		
-		echo "Token in Signup is ".$token;
+		# DO NOT echo here (e.g. echo "Token is".$token). You can't echo anything to the page before
+		# A) Trying to do a redirect or 
+		# B) Setting a cookie.
+		
 		# If we get a token, user has already registered
 		if ($token) {
 			# Send them to the proper page 
@@ -171,7 +174,6 @@ class users_controller extends base_controller {
 	/* Send user to proper login page */
 	public function send_to_proper_dashboard($role) {
 	
-		echo "Your role is: ".$role;
 		if($role == "partner") {
 			Router::redirect("/leads/add");					
 		}

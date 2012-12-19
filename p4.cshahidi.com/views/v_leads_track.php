@@ -38,6 +38,7 @@
 													 data-status-value="<?=$lead['status']?>">
 													 
 					<option value="<?=$lead['status']?>" selected="selected"><?=$lead['status']?></option>
+					<option value="pending">pending</option>
 					<option value="accepted">accepted</option>
 					<option value="rejected">rejected</option>
 				</select>
