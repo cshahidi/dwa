@@ -41,7 +41,7 @@
 		
 		<!-- $role defined in login() method: Either partner or principal -->			
 		<p>New User (<?=$role?>)?</p>
-		<span id="signup"><a href="/users/signup/<?=$role?>">Signup</a></span>	
+		<span id="signup"><a href="/users/signup/<?=$role?>">Sign Up</a></span>	
 		
 	</div> <!-- endiv login-info -->	
 	

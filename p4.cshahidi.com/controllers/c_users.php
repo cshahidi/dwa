@@ -213,6 +213,8 @@ class users_controller extends base_controller {
 		Router::redirect("/");	
 	}
 	
+	
+	/* ------  Profile not used in P4: for later use ------  */
 	public function profile() {
 		
 	# If user is blank, they're not logged in. 

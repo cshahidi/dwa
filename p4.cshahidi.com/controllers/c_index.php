@@ -26,7 +26,7 @@ class index_controller extends base_controller {
 						# Add Master stylesheet
 						#"/css/master.css",
 						# Add stylesheet specific to Home page -->
-						"/css/home.css"			
+						"/css/home_page.css"			
 	                    );
 	    
 	    	$this->template->client_files = Utils::load_client_files($client_files);   

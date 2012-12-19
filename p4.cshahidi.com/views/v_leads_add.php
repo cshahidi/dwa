@@ -136,7 +136,7 @@
    </fieldset>
   
    <p>
-	 <input type="submit" value="Add Lead" />
+	 <input type="submit" class="button" value="Add Lead" />
    </p>
 </form>
 
