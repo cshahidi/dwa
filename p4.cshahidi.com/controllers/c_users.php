@@ -56,6 +56,7 @@ class users_controller extends base_controller {
 		
 		$token = DB::instance(DB_NAME)->select_field($q);
 		
+		echo "Token in Signup is ".$token;
 		# If we get a token, user has already registered
 		if ($token) {
 			# Send them to the proper page 
@@ -163,18 +164,25 @@ class users_controller extends base_controller {
 			setcookie("token", $token, strtotime('+1 year'), '/');
 		
 			# If we were passed a $destination (e.g. /users/profile page), send them there
-			if(isset($_GET['destination'])) {
-				Router::redirect($_GET['destination']);
+			// Removed this code
+			
+			# Otherwise, send them to the proper dashboard page 
+			// $this->send_to_proper_dashboard($_POST['role']);		
+			
+			$role = $_POST['role'];
+			echo "Your role is: ".$role;
+			if($role == "partner") {
+				Router::redirect("/leads/add");					
 			}
 			else {
-				# Otherwise, send them to the proper dashboard page 
-				$this->send_to_proper_dashboard($_POST['role']);				
+				# Role is principal
+				Router::redirect("/leads/track");		
 			}			
-		}
+		}	
 	}	
 	
 	/* Send user to proper login page */
-	public function send_to_proper_dashboard($role) {
+/*	public function send_to_proper_dashboard($role) {
 		echo "Your role is: ".$role;
 		if($role == "partner") {
 			Router::redirect("/leads/add");					
@@ -184,6 +192,18 @@ class users_controller extends base_controller {
 			Router::redirect("/leads/track");						
 		}
 	}
+/*	
+	public function send_to_proper_dashboard($role) {
+		echo "Your role is: ".$role;
+		if($role == "partner") {
+			return("/leads/add");					
+		}
+		else {
+			# Role is principal
+			return("/leads/track");						
+		}
+	}
+*/	
 		
 	
 	/* ------  Logout ---------*/
