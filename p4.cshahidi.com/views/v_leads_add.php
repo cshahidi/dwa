@@ -1,7 +1,7 @@
 <!-- Add Lead(Lead Generator) -->	
 
 <h2>Lead Generator Input Form</h2>
-<h3>Welcome back <?=$user->first_name?>! Please Add New Lead</h3>
+<h3>Welcome back <?=$user->first_name?>! Please Add New Lead:</h3>
 
 <? if($add_another_lead): ?>
 	<div class="msg">

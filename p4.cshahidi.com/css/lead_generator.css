@@ -38,15 +38,17 @@ select {
 /* "Add Lead" Submit button */	
 .button {
 	font-family: Arial;
-	width: 200px;
+	width: 180px;
 	height: 50px;
 	font-size:22px;	
 	color: white;	
 	cursor: pointer;
 	border-radius: 15px;	
-	margin-left: 0px;
-	background-color: teal;		
-	background-color: #DC143C;	
+	margin-left: 280px;
+	margin-bottom: 5px;
+	background-color: #DC143C;		
+	background-color: maroon;	
+	background-color: teal;	
 }
 
 
