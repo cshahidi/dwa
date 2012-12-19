@@ -42,7 +42,7 @@
 						<li><a href="/">Home</a></li>	
 						<li><a href="/leads/add">Partners</a> <!-- will later have own landing page -->
 							<ul>
-								<li><a href="leads/add">Add Lead</a></li>
+								<li><a href="/leads/add">Add Lead</a></li>
 							</ul>	
 						</li>	
 						<li><a href="/futurepage/">Investors (TBD)</a></li>
