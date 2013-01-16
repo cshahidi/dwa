@@ -76,7 +76,7 @@ class users_controller extends base_controller {
 		$user_id = DB::instance(DB_NAME)->insert("users", $_POST);
 		
 		
-		# Insert this user also into either the "partners" or "principals" table)
+		# Insert this user also into either the "partners" or "principals" table
 
 		# Prepare our data array to be inserted
 		# In this case, we're only updating one field, so our array only has one entry
@@ -93,7 +93,7 @@ class users_controller extends base_controller {
 		
 		# Store this token in a cookie. This logs in user so user need not log in as well.
 		# Cookie tells us if this user has been authorized and is logged in. 
-		setcookie("token", $token, strtotime('+1 year'), '/');		
+		setcookie("token", $_POST['token'], strtotime('+1 year'), '/');		
 		
 		# Otherwise, send them to the proper page 
 		$this->send_to_proper_dashboard($_POST['role']);			
@@ -166,7 +166,7 @@ class users_controller extends base_controller {
 			# Store this token in a cookie
 			setcookie("token", $token, strtotime('+1 year'), '/');
 			
-			# Otherwise, send them to the proper dashboard page 
+			# Send them to the proper dashboard page 
 			$this->send_to_proper_dashboard($_POST['role']);				
 		}	
 	}	
@@ -187,7 +187,7 @@ class users_controller extends base_controller {
 	/* ------  Logout ---------*/
 	public function logout() {
 	
-		# Ensure user is not already logged out. If so, take them to Profile page and exit.
+		# Ensure user is not already logged out. 
 		if (!$this->user) {
 			# Already logged out; Display the Home page and exit
 			Router::redirect("/");			
