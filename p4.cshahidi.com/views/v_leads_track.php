@@ -31,15 +31,15 @@
 			<td><?=$lead['city']?></td>
 			<td><?=$lead['state']?></td>	
 			<td id="lead_row_<?=$lead['lead_id']?>_status>">     
-			
+				<!-- <?=$lead['status']?> for debugging -->
 				<!-- Make this modifiable (Pending, Accepted, Rejected) -->	
 				<!-- Use HTML 5 data attributes to associate lead_id and status with record -->
 				
 				<!-- Susan's solution -->
 				<select name="status" class="status" data-lead-id="<?=$lead['lead_id']?>"
 													 data-status-value="<?=$lead['status']?>">								 
-					<option value="pending" <? if($lead['status'] == "pending") echo "selected" ?>>pending</option>
-					<option value="accepted" <? if($lead['status'] == "accepted") echo "selected" ?>>accepted</option>
+					<option value="pending" <? if($lead['status'] == "pending") echo 'selected="selected"' ?>>pending</option>
+					<option value="accepted" <? if($lead['status'] == "accepted") echo 'selected="selected"' ?>>accepted</option>
 					<option value="rejected" <? if($lead['status'] == "rejected") echo "selected" ?>>rejected</option>
 				</select>							
 				
@@ -94,19 +94,19 @@
 		
 		
 	// Use Ajax to change "status" field in DB after user changes status in drop-down menu  
-	//$('.status').change(function() {
 
+	// Either $(".status") or $("select").change(function()) will work
+	//$('.status').change(function() {  
 	$("select").change(function () {
-		
+
 		// Figure out the lead_id based on the data attribute
 		var lead_id = $(this).attr('data-lead-id');		
+		console.log(lead_id);
 		
 		// Figure out the status (pending, accepted, rejected) based on the data attribute
-		//var status = $(this).attr('data-status-value');  
-        //var status =  $(this).attr("selected");
-		//var status = $('select.status option:selected').val();
-		var status = $("select option:selected").val();		
-  	
+		var status = $(this).attr('data-status-value');  //original DB status (for debugging)
+		console.log(status);		
+        status =  $(this).attr('value');				 //new selected status to insert into DB 
 		console.log(status);
 	
 		// Call update_status method in leads controller to do the ajax work of updating status in DB
@@ -114,7 +114,7 @@
 			type: 'POST',
 			url: '/leads/update_status/',
 			success: function(response) { 				
-				// Update the status field in this row? Already have changed it!				
+				// Update the status field in this row? Already have changed it! No need.				
 			},
 			data: {
 				// Make sure we tell our method the lead_id and status 

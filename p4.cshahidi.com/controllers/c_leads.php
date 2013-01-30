@@ -96,7 +96,7 @@ class leads_controller extends base_controller {
 			WHERE user_id = ".$this->user->user_id;			
 			
 		$_POST['partner_id'] = DB::instance(DB_NAME)->select_field($q);
-		// echo "Your partner_id is: ".$_POST['partner_id']; (Dont' echo before redirect
+		// echo "Your partner_id is: ".$_POST['partner_id']; (Don't echo before redirect)
 		
 		# Unix timestamp of when this post was created/modified
 		$_POST['created']  = Time::now();
