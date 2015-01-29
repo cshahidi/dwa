@@ -11,6 +11,7 @@ $(document).ready(function() {	//start doc ready
 	var taxes;
 	var insurance;
 	var principal_and_interest;
+	var utilities;
 	var max_offer_price;
 
 	/******************************************************************************/
@@ -62,7 +63,7 @@ $(document).ready(function() {	//start doc ready
 			// All the inputs are validated, Calculate maximimum Offer Price							  
 			max_offer_price = after_repair_value - profit_goal - estimated_repairs - commission - 
 							closing_costs_in - closing_costs_out - taxes - 
-							insurance - principal_and_interest;
+							insurance - principal_and_interest - utilities;
 
 			// Round final value down to lowest integer value.
 			$("#maximum-offer").val(Math.floor(max_offer_price));		
@@ -127,7 +128,13 @@ $(document).ready(function() {	//start doc ready
 		principal_and_interest = $("#principal-and-interest").val();
 		if (validateNumericInput( principal_and_interest, "Principal & Interest")== false) {
 			return (false);
-		}		
+		}
+
+		// Process Utilities			
+		utilities = $("#utilities").val();
+		if (validateNumericInput( utilities, "Utilities")== false) {
+			return (false);
+		}			
 						
 		// All inputs valid
 		return (true);
@@ -176,7 +183,7 @@ $(document).ready(function() {	//start doc ready
 	function calculate_subtotal_for_mortgage() {
 	
 		subtotal =  after_repair_value - profit_goal - estimated_repairs - commission - 
-						closing_costs_in - closing_costs_out - taxes - insurance; 
+						closing_costs_in - closing_costs_out - taxes - insurance - utilities; 
 
 		$("#trulia_info").html("Your Subtotal is " + subtotal + ". " +
 						"You can use this as your Property Price to get your mortgage payment using " +
@@ -196,6 +203,10 @@ $(document).ready(function() {	//start doc ready
 	// "Clear All" Button - Clear all text fields & Error message
 	$("#refresh-button").click(function() {
 	
+		// Suggested edit by SB: Give all elements that can be refreshed a class "refreshable".
+		// That way you can clear them all with one line of code, and easily add new elements
+		// the road.
+	
 		$("#after-repair-value").val("");	
 		$("#profit-goal").val("");	
 		$("#estimated-repairs").val("");	
@@ -205,6 +216,7 @@ $(document).ready(function() {	//start doc ready
 		$("#taxes").val("");	
 		$("#insurance").val("");	
 		$("#principal-and-interest").val("");	
+		$("#utilities").val("");	
 		
 		$("#trulia_info").html("");  
 		
