@@ -63,7 +63,7 @@ $(document).ready(function() {	//start doc ready
 			// All the inputs are validated, Calculate maximimum Offer Price							  
 			max_offer_price = after_repair_value - profit_goal - estimated_repairs - commission - 
 							closing_costs_in - closing_costs_out - taxes - 
-							insurance - principal_and_interest - utilities;
+							insurance - utilities- principal_and_interest;
 
 			// Round final value down to lowest integer value.
 			$("#maximum-offer").val(Math.floor(max_offer_price));		
@@ -124,17 +124,17 @@ $(document).ready(function() {	//start doc ready
 			return (false);
 		}
 		
-		// Process Principal & Interest (P&I: Mortgage Payments)			
-		principal_and_interest = $("#principal-and-interest").val();
-		if (validateNumericInput( principal_and_interest, "Principal & Interest")== false) {
-			return (false);
-		}
-
 		// Process Utilities			
 		utilities = $("#utilities").val();
 		if (validateNumericInput( utilities, "Utilities")== false) {
 			return (false);
 		}			
+		
+		// Process Principal & Interest (P&I: Mortgage Payments)			
+		principal_and_interest = $("#principal-and-interest").val();
+		if (validateNumericInput( principal_and_interest, "Principal & Interest")== false) {
+			return (false);
+		}		
 						
 		// All inputs valid
 		return (true);
