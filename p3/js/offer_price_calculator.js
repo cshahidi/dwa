@@ -33,24 +33,13 @@ $(document).ready(function() {	//start doc ready
 	});	
 	
 	/******************************************************************************/	
-	// Add commas to the figures to represent 1000's.
+	// March 4, 2015 - Enhancement to original code 
+	// Add commas to the figures to represent 1000's. 
 	
 	/* Source: http://stackoverflow.com/questions/3883342/add-commas-to-a-number-in-jquery/18676419#18676419 */
 	/* Timothy Pirez answer was very correct but if you need to replace the numbers with commas 
 	 * Immediately as user types in textfield, u might want to use the Keyup function. 
 	 */	
- 
-/*
-	$("input[type=text]").live('keyup', function () {
-			var value=("input[type=text]").val();
-			var newvalue=value.replace(/,/g, '');  
-			console.log(newvalue);	
-			
-			var valuewithcomma = Number(newvalue).toLocaleString('en');   
-			$(this).val(valuewithcomma);
-		}
-	});
-*/     // PROBLEM: all the text fields are filled with first figure (Commas are inserted)
 
 	
 	/************************************************************************/
